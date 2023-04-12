@@ -1,0 +1,617 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.caja-todo {
+    background-color: #e3e3e3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 150%;
+}
+
+header {
+    position: relative;
+    box-shadow: 1px 1px 20px 1px rgba(0, 0, 0,.5);
+    background: linear-gradient(#007bff 20%, #6ab2ff);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 150px;
+    justify-content: center;
+    align-items: center;
+}
+
+.encabezado {
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header span {
+    background-image: url(../IMG/logo-removebg-preview2.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 170px;
+    height: 100px;
+    position: relative;
+    left: 30px;
+    top: 30px;
+}
+
+header nav {
+    display: flex;
+    align-items: center;
+    margin: 0 30px;
+    gap: 0 25px;
+}
+
+nav a {
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.navegador {
+    position: relative;
+    color: white;
+    transition: all .4s ease-in-out;
+}
+
+.navegador:hover {
+    color: #001233;
+}
+
+.item:before {
+    position: absolute;
+    bottom: 0;
+    content: "";
+    display: block;
+    width: 0;
+    height: 2px;
+    background-color: #001233;
+    transition: all .4s;
+}
+
+.item:hover:before {
+    width: 100%;
+}
+
+.tres:before {
+    left: 50%;
+}
+
+.tres:hover:before {
+    left: 0;
+}
+
+.button {
+    background-color: transparent;
+    border: none;
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    color: #ffffff;
+    font-size: 16px;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: .5s;
+}
+
+.button:hover {
+    background: #001233;
+    color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #001233,
+        0 0 25px #001233,
+        0 0 50px #001233,
+        0 0 100px #001233;
+}
+
+.menu summary {
+    padding: 5px 10px;
+    text-transform: uppercase;
+    color: white;
+    font-weight: 600;
+    transition: all .4 ease-in-out;
+}
+
+.menu summary:hover {
+    background: #001233;
+    color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #001233,
+        0 0 25px #001233,
+        0 0 50px #001233,
+        0 0 100px #001233;
+}
+
+.menu a {
+    text-transform: uppercase;
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+}
+
+.menu a:hover {
+    color: #001233;
+}
+
+.menu button {
+    font-weight: 600;
+    background-color: transparent;
+    border: none;
+    position: relative;
+    display: inline-block;
+    padding: 5px 10px;
+    color: #979DAC;
+    font-size: 13px;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: .5s;
+}
+
+.menu button:hover {
+    background: #979DAC;
+    color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #979DAC,
+        0 0 25px #979DAC,
+        0 0 50px #979DAC,
+        0 0 100px #979DAC;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 80px;
+}
+
+.footer input {
+    font-size: 17px;
+    border-radius: 5px;
+    outline: none 0;
+    border: 0px;
+    width: 60%;
+    padding: 12px 0;
+    margin-right: 10px;
+    transition: all .3 ease-in-out;
+}
+
+.footer a {
+    font-weight: 600;
+    text-decoration: none;
+    color: white;
+    fill: white;
+    transition: all .3s ease-in-out;
+}
+
+svg {
+    height: 30px;
+    width: 30px;
+}
+
+svg:hover {
+    fill: #5eafff;
+}
+
+.footer a:hover {
+    transform: scale(1.1);
+    color: #5eafff;
+    filter: drop-shadow(0 0 5px 0 #5eafff);
+}
+
+.footer input:focus {
+    box-shadow: 1px 1px 10px 1px rgba(255, 255, 255);
+}
+
+.footer input:hover {
+    border: 1px solid white;
+}
+
+main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.caja-mejores {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 470px;
+}
+
+.caja-mejores h1 {
+    font-weight: 800;
+    color: #001233;
+    margin-top: 20px;
+    text-align: center;
+    height: 90px;
+    width: 100%;
+    font-size: 70px;
+}
+
+.caja-mejores p {
+    font-size: 17px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.galeria {
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    width: 90%;
+    display: flex;
+    height: 20rem;
+    gap: 1rem;
+}
+
+.galeria>figure {
+    flex: 1;
+    border-radius: 1rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: all .5s cubic-bezier(.25, .4, .45, 1.4);
+}
+
+.galeria>figure:hover {
+    flex: 3;
+}
+
+.figure1 {
+    background-image: url(../IMG/1.jpg);
+}
+
+.figure2 {
+    background-image: url(../IMG/2.jpg);
+}
+
+.figure3 {
+    background-image: url(../IMG/3.jpg);
+}
+
+.figure4 {
+    background-image: url(../IMG/4.jpg);
+}
+
+.figure5 {
+    background-image: url(../IMG/5.jpg);
+}
+
+.caja-mision {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 300px;
+}
+
+.caja-mision h1 {
+    color: #001233;
+    width: 100%;
+    text-align: center;
+    font-size: 70px;
+}
+
+.caja-mision p {
+    font-size: 30px;
+    text-align: center;
+    width: 70%;
+}
+
+.caja-vision {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 270px;
+}
+
+.caja-vision h1 {
+    color: #001233;
+    width: 100%;
+    text-align: center;
+    font-size: 70px;
+}
+
+.caja-vision p {
+    font-size: 30px;
+    text-align: center;
+    width: 70%;
+}
+
+.caja-general {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 300px;
+    margin-bottom: 50px;
+}
+
+.caja-general h1 {
+    color: #001233;
+    width: 100%;
+    text-align: center;
+    font-size: 70px;
+}
+
+.caja-general p {
+    font-size: 30px;
+    text-align: center;
+    width: 70%;
+}
+
+.caja-expecifico {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 400px;
+}
+
+.caja-expecifico h1 {
+    color: #001233;
+    width: 100%;
+    text-align: center;
+    font-size: 70px;
+}
+
+.caja-expecifico li {
+    font-size: 30px;
+    text-align: center;
+    width: 70%;
+}
+
+.caja-expecifico ul {
+    gap: 5px 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pie-pagina {
+    top: 70px;
+    position: relative;
+    background: #002855;
+    display: flex;
+    width: 100%;
+    height: 300px;
+    align-items: center;
+}
+
+.pie-pagina p {
+    color: white;
+}
+
+.caja-enlace {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 50%;
+    gap: 20px 0;
+}
+
+.caja-enlace p {
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.caja-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 50%;
+    gap: 20px 0;
+}
+
+.caja-info p {
+    text-align: center;
+}
+
+.caja-pagos {
+    display: flex;
+    flex-direction: column;
+}
+
+.caja-redes {
+    display: flex;
+    flex-direction: column;
+}
+
+.caja-enlace p {
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.caja-pagos a,
+.caja-redes a {
+    text-decoration: none;
+}
+
+.caja-iconos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50%;
+}
+
+.caja-iconos a {
+    background-color: white;
+    top: 25px;
+    position: relative;
+    font-size: 20px;
+    color: black;
+    text-align: center;
+    padding: 20px;
+    border-radius: 50%;
+    border: none;
+    box-shadow: 1px 1px 10px 1px rgb(0, 0, 0.5);
+    transition: transform .5s;
+    overflow: hidden;
+}
+
+.caja-iconos .face::after {
+    height: 100%;
+    width: 100%;
+    top: -90px;
+    left: 0;
+    content: "";
+    background: linear-gradient(-45deg, #1167fc, rgb(0, 42, 255) 40%, blue);
+    transition: 0.5s;
+    color: white;
+    position: absolute;
+}
+
+.caja-iconos .insta::after {
+    height: 100%;
+    width: 100%;
+    top: -90px;
+    left: 0;
+    content: "";
+    background: linear-gradient(-45deg, #9a11fc, rgb(255, 0, 0) 40%, rgb(255, 213, 0));
+    transition: 0.5s;
+    color: white;
+    position: absolute;
+}
+
+.caja-iconos .twi::after {
+    height: 100%;
+    width: 100%;
+    top: -90px;
+    left: 0;
+    content: "";
+    background: linear-gradient(-45deg, #11ecfc, rgb(0, 132, 255) 40%, blue);
+    transition: 0.5s;
+    color: white;
+    position: absolute;
+}
+
+
+.caja-iconos a .fa {
+    z-index: 10;
+    font-size: 20px;
+    position: relative;
+    transition: color 0.5s;
+}
+
+
+.caja-iconos a:hover::after {
+    top: 0;
+
+}
+
+.caja-iconos a:hover .fa {
+    color: white;
+}
+
+.caja-iconos a:hover {
+    transform: translateY(-10px);
+}
+
+.enlace {
+    gap: 0 15px;
+    display: flex;
+}
+
+.caja-ico {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50%;
+}
+
+.caja-ico a {
+    top: 25px;
+    position: relative;
+    font-size: 10px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    padding: 15px;
+    border-radius: 50%;
+    border: none;
+    transition: transform .5s;
+    overflow: hidden;
+}
+
+.caja-ico .nequi::after {
+    height: 100%;
+    width: 100%;
+    top: -90px;
+    left: 0;
+    content: "";
+    background: linear-gradient(-45deg, #11ecfc, rgb(230, 0, 255) 40%, blue);
+    transition: 0.5s;
+    color: white;
+    position: absolute;
+}
+
+.caja-ico .daviplata::after {
+    height: 100%;
+    width: 100%;
+    top: -90px;
+    left: 0;
+    content: "";
+    background: linear-gradient(-45deg, #f45050, rgb(150, 18, 18) 40%, rgb(255, 0, 0));
+    transition: 0.5s;
+    color: white;
+    position: absolute;
+}
+
+.caja-ico .banco::after {
+    height: 100%;
+    width: 100%;
+    top: -90px;
+    left: 0;
+    content: "";
+    background: linear-gradient(-45deg, #111111, rgb(255, 242, 0) 40%, rgb(23, 23, 23));
+    transition: 0.5s;
+    color: white;
+    position: absolute;
+}
+
+.caja-ico a .fa {
+    z-index: 10;
+    font-size: 20px;
+    position: relative;
+    transition: color 0.5s;
+}
+
+
+.caja-ico a:hover::after {
+    top: 0;
+
+}
+
+.caja-iconos a:hover .fa {
+    color: white;
+}
+
+.caja-ico a:hover {
+    transform: translateY(-10px);
+}

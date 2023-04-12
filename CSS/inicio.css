@@ -1,0 +1,135 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #001233;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100vh;
+}
+
+.caja-todo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90%;
+    width: 100%;
+}
+
+h1 {
+    position: relative;
+    top: -60px;
+    color: black;
+    margin-bottom: 0;
+}
+
+.caja-intermedia {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.987);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(255, 255, 255,.4);
+    border-radius: 10px;
+    width: 35%;
+    height: 80%;
+}
+
+.caja-contenido {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.user-box {
+    position: relative;
+}
+
+.user-box input {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #050505;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #1d1d1d;
+    outline: none;
+    background: transparent;
+}
+
+.user-box label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #1b1b1b;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.user-box input:focus~label,
+.user-box input:valid~label {
+    top: -20px;
+    left: 0;
+    color: #1c1c1c;
+    font-size: 12px;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    color: #1e1e1e;
+    font-size: 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: .5s;
+    letter-spacing: 4px
+}
+
+button:hover {
+    background: #0080ff;
+    color: #191919;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #0080ff,
+        0 0 25px #0080ff,
+        0 0 50px #0080ff,
+        0 0 100px #0080ff;
+}
+
+.caja-register {
+    margin-top: 30px;
+    width: 50%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    left: 25%
+}
+
+.caja-register p {
+    margin-bottom: 5px;
+    padding: 0;
+    color: rgb(255, 106, 0);
+}
+
+.caja-volver {
+    margin-top: 20px;
+    margin-left: 20px;
+    width: 150px;
+}
+
+.caja-volver button {
+    color: rgb(255, 255, 255);
+}

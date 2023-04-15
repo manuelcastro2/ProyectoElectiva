@@ -216,3 +216,246 @@ svg:hover {
     color: #5eafff;
     filter: drop-shadow(0 0 5px 0 #5eafff);
 }
+
+.pie-pagina p{
+    color: white;
+}
+
+.caja-enlace {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 50%;
+    gap: 20px 0;
+}
+
+.caja-enlace p{
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.caja-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 50%;
+    gap: 20px 0;
+}
+
+.caja-info p{
+    text-align: center;
+}
+
+.caja-pagos {
+    display: flex;
+    flex-direction: column;
+}
+
+.caja-redes {
+    display: flex;
+    flex-direction: column;
+}
+
+.caja-enlace p {
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.caja-pagos a,
+.caja-redes a {
+    text-decoration: none;
+}
+
+.caja-iconos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50%;
+}
+
+.caja-iconos a {
+    background-color: white;
+    top: 25px;
+    position: relative;
+    font-size: 20px;
+    color: black;
+    text-align: center;
+    padding: 20px;
+    border-radius: 50%;
+    border: none;
+    box-shadow: 1px 1px 10px 1px rgb(0, 0, 0.5);
+    transition: transform .5s;
+    overflow: hidden;
+}
+
+.caja-iconos .face::after {
+    height: 100%;
+    width: 100%;
+    top: -90px;
+    left: 0;
+    content: "";
+    background: linear-gradient(-45deg, #1167fc, rgb(0, 42, 255) 40%, blue);
+    transition: 0.5s;
+    color: white;
+    position: absolute;
+}
+
+.caja-iconos .insta::after {
+    height: 100%;
+    width: 100%;
+    top: -90px;
+    left: 0;
+    content: "";
+    background: linear-gradient(-45deg, #9a11fc, rgb(255, 0, 0) 40%, rgb(255, 213, 0));
+    transition: 0.5s;
+    color: white;
+    position: absolute;
+}
+
+.caja-iconos .twi::after {
+    height: 100%;
+    width: 100%;
+    top: -90px;
+    left: 0;
+    content: "";
+    background: linear-gradient(-45deg, #11ecfc, rgb(0, 132, 255) 40%, blue);
+    transition: 0.5s;
+    color: white;
+    position: absolute;
+}
+
+
+.caja-iconos a .fa {
+    z-index: 10;
+    font-size: 20px;
+    position: relative;
+    transition: color 0.5s;
+}
+
+
+.caja-iconos a:hover::after {
+    top: 0;
+
+}
+
+.caja-iconos a:hover .fa {
+    color: white;
+}
+
+.caja-iconos a:hover {
+    transform: translateY(-10px);
+}
+
+.enlace {
+    gap: 0 15px;
+    display: flex;
+}
+
+.caja-ico {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50%;
+}
+
+.caja-ico a {
+    top: 25px;
+    position: relative;
+    font-size: 10px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    padding: 15px;
+    border-radius: 50%;
+    border: none;
+    transition: transform .5s;
+    overflow: hidden;
+}
+
+.caja-ico .nequi::after {
+    height: 100%;
+    width: 100%;
+    top: -90px;
+    left: 0;
+    content: "";
+    background: linear-gradient(-45deg, #11ecfc, rgb(230, 0, 255) 40%, blue);
+    transition: 0.5s;
+    color: white;
+    position: absolute;
+}
+
+.caja-ico .daviplata::after {
+    height: 100%;
+    width: 100%;
+    top: -90px;
+    left: 0;
+    content: "";
+    background: linear-gradient(-45deg, #f45050, rgb(150, 18, 18) 40%, rgb(255, 0, 0));
+    transition: 0.5s;
+    color: white;
+    position: absolute;
+}
+
+.caja-ico .banco::after {
+    height: 100%;
+    width: 100%;
+    top: -90px;
+    left: 0;
+    content: "";
+    background: linear-gradient(-45deg, #111111, rgb(255, 242, 0) 40%, rgb(23, 23, 23));
+    transition: 0.5s;
+    color: white;
+    position: absolute;
+}
+
+.caja-ico a .fa {
+    z-index: 10;
+    font-size: 20px;
+    position: relative;
+    transition: color 0.5s;
+}
+
+
+.caja-ico a:hover::after {
+    top: 0;
+
+}
+
+.caja-iconos a:hover .fa {
+    color: white;
+}
+
+.caja-ico a:hover {
+    transform: translateY(-10px);
+}
+main{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.contenido{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+section{
+    border: 1px solid;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+article{
+    border: 1px solid;
+    width: 60%;
+    display: flex;
+    flex-wrap: wrap;
+}

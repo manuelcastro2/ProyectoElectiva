@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <link rel="stylesheet" href="../CSS/productos.css">
     <title>PRODUCTOS</title>
 </head>
@@ -80,67 +81,43 @@
             </div>
         </header>
         <main>
-            <section>
-                <form method="post">
-                    <button type="submit" name="todo">todo</button>
-                </form>
-                <?php
-                $consulta = "SELECT * FROM productos";
-                $resultado = mysqli_query($conn, $consulta);
-                $producto = mysqli_fetch_assoc($resultado);
-                ?>
-                <a href="productos.php?tipo_produc=<?php echo $producto["tipo_produc"]; ?>">
-                    <?php echo $producto["tipo_produc"]; ?><br>
-                </a>
-                <?php
-                while ($producto = mysqli_fetch_array($resultado)) {
+            <div class="contenido">
+                <section>
+                    <form method="post">
+                        <button type="submit" name="todo">todo</button>
+                    </form>
+                    <?php
+                    $consulta = "SELECT * FROM productos";
+                    $resultado = mysqli_query($conn, $consulta);
+                    $producto = mysqli_fetch_assoc($resultado);
                     ?>
                     <a href="productos.php?tipo_produc=<?php echo $producto["tipo_produc"]; ?>">
                         <?php echo $producto["tipo_produc"]; ?><br>
                     </a>
                     <?php
-                }
-                ?>
-            </section>
-            <article>
-                <?php
-                $a = false;
-                if (isset($_POST["todo"])) {
+                    while ($producto = mysqli_fetch_array($resultado)) {
+                        ?>
+                        <a href="productos.php?tipo_produc=<?php echo $producto["tipo_produc"]; ?>">
+                            <?php echo $producto["tipo_produc"]; ?><br>
+                        </a>
+                        <?php
+                    }
+                    ?>
+                </section>
+                <article>
+                    <?php
                     $a = false;
-                } elseif (isset($_GET["tipo_produc"])) {
-                    $a = true;
-                }
+                    if (isset($_POST["todo"])) {
+                        $a = false;
+                    } elseif (isset($_GET["tipo_produc"])) {
+                        $a = true;
+                    }
 
-                if ($a == true) {
-                    $verificacion = $_GET["tipo_produc"];
-                    $consulta = "SELECT * FROM productos where tipo_produc='$verificacion'";
-                    $resultado = mysqli_query($conn, $consulta);
-                    $produc = mysqli_fetch_assoc($resultado);
-                    ?>
-                    <div>
-                        <?php
-                        echo $produc["Nombre_prod"];
-                        echo $produc["cantidad"];
-                        $cantidad = (int) $produc["cantidad"];
-                        ?>
-                        <a href="productos.php?id_producto=<?php echo $produc["id_producto"]; ?>"> + </a>
-                    </div>
-                    <?php
-                } else {
-                    $consulta = "SELECT * FROM productos";
-                    $resultado = mysqli_query($conn, $consulta);
-                    $produc = mysqli_fetch_assoc($resultado);
-                    ?>
-                    <div>
-                        <?php
-                        echo $produc["Nombre_prod"];
-                        echo $produc["cantidad"];
-                        $cantidad = (int) $produc["cantidad"];
-                        ?>
-                        <a href="productos.php?id_producto=<?php echo $produc["id_producto"]; ?>"> + </a>
-                    </div>
-                    <?php
-                    while ($produc = mysqli_fetch_array($resultado)) {
+                    if ($a == true) {
+                        $verificacion = $_GET["tipo_produc"];
+                        $consulta = "SELECT * FROM productos where tipo_produc='$verificacion'";
+                        $resultado = mysqli_query($conn, $consulta);
+                        $produc = mysqli_fetch_assoc($resultado);
                         ?>
                         <div>
                             <?php
@@ -151,29 +128,75 @@
                             <a href="productos.php?id_producto=<?php echo $produc["id_producto"]; ?>"> + </a>
                         </div>
                         <?php
+                    } else {
+                        $consulta = "SELECT * FROM productos";
+                        $resultado = mysqli_query($conn, $consulta);
+                        $produc = mysqli_fetch_assoc($resultado);
+                        ?>
+                        <div>
+                            <?php
+                            echo $produc["Nombre_prod"];
+                            echo $produc["cantidad"];
+                            $cantidad = (int) $produc["cantidad"];
+                            ?>
+                            <a href="productos.php?id_producto=<?php echo $produc["id_producto"]; ?>"> + </a>
+                        </div>
+                        <?php
+                        while ($produc = mysqli_fetch_array($resultado)) {
+                            ?>
+                            <div>
+                                <?php
+                                echo $produc["Nombre_prod"];
+                                echo $produc["cantidad"];
+                                $cantidad = (int) $produc["cantidad"];
+                                ?>
+                                <a href="productos.php?id_producto=<?php echo $produc["id_producto"]; ?>"> + </a>
+                            </div>
+                            <?php
+                        }
                     }
-                }
-                ?>
-            </article>
-            <div>
-                <div>
-                    <div>
+                    ?>
+                </article>
+            </div>
+            <div class="pie-pagina">
+                <div class="caja-enlace">
+                    <div class="caja-pagos">
                         <p>metodos de pago</p>
-                        <a href="">NEQUI</a>
-                        <a href="">DAVIPLATA</a>
-                        <a href="">BANCOLOMBIA</a>
+                        <div class="enlace">
+                            <div class="caja-ico">
+                                <a class="nequi" href=""><i class="fa">NEQUI</i></a>
+                            </div>
+                            <div class="caja-ico">
+                                <a class="daviplata" href=""><i class="fa">DAVIPLATA</i></a>
+                            </div>
+                            <div class="caja-ico">
+                                <a class="banco" href=""><i class="fa">BANCOLOMBIA</i></a>
+                            </div>
+                        </div>
                     </div>
-                    <div>
+                    <div class="caja-redes">
                         <p>siguenos</p>
-                        <a href="">FACEBOOK</a>
-                        <a href="">INSTAGRAN</a>
-                        <a href="">TWITTER</a>
+                        <div class="enlace">
+                            <div class="caja-iconos">
+                                <a class="face" href=""> <i class="fa-brands fa-facebook fa"></i></a>
+                            </div>
+                            <div class="caja-iconos">
+                                <a class="insta" href=""><i class="fa-brands fa-instagram fa"></i></a>
+
+                            </div>
+                            <div class="caja-iconos">
+                                <a class="twi" href=""><i class="fa-brands fa-twitter fa"></i></a>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <p>info@gmail.com</p>
-                <p>estamos actualizando nuestros productos y ofreciendo productos para asegurar las necesidades de
-                    nuestros clientes </p>
-                <p>@2023 ELECTROSHOP</p>
+                <div class="caja-info">
+                    <p>info@gmail.com</p>
+                    <p>estamos actualizando nuestros productos y ofreciendo productos para asegurar las necesidades de
+                        nuestros clientes </p>
+                    <p>@2023 ELECTROSHOP</p>
+                </div>
             </div>
         </main>
     </div>

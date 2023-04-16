@@ -83,6 +83,7 @@
         <main>
             <div class="contenido">
                 <section>
+                    <h1>CATEGORIAS</h1>
                     <form method="post">
                         <button type="submit" name="todo">todo</button>
                     </form>
@@ -91,7 +92,8 @@
                     $resultado = mysqli_query($conn, $consulta);
                     $producto = mysqli_fetch_assoc($resultado);
                     ?>
-                    <a href="productos.php?tipo_produc=<?php echo $producto["tipo_produc"]; ?>">
+                    <a class="elemento producto"
+                        href="productos.php?tipo_produc=<?php echo $producto["tipo_produc"]; ?>">
                         <?php echo $producto["tipo_produc"]; ?><br>
                     </a>
                     <?php
@@ -119,10 +121,19 @@
                         $resultado = mysqli_query($conn, $consulta);
                         $produc = mysqli_fetch_assoc($resultado);
                         ?>
-                        <div>
+                        <div class="caja-producto">
+                            <figure class="img-producto"><!--img--></figure>
+                            <p class="p1">
+                                <?php
+                                echo $produc["Nombre_prod"];
+                                ?>
+                            </p>
+                            <p class="p2">
+                                <?php
+                                echo 'Cantidad:', $produc["cantidad"];
+                                ?>
+                            </p>
                             <?php
-                            echo $produc["Nombre_prod"];
-                            echo $produc["cantidad"];
                             $cantidad = (int) $produc["cantidad"];
                             ?>
                             <a href="productos.php?id_producto=<?php echo $produc["id_producto"]; ?>"> + </a>
@@ -133,10 +144,19 @@
                         $resultado = mysqli_query($conn, $consulta);
                         $produc = mysqli_fetch_assoc($resultado);
                         ?>
-                        <div>
+                        <div class="caja-producto">
+                            <figure class="img-producto"><!--img--></figure>
+                            <p class="p1">
+                                <?php
+                                echo $produc["Nombre_prod"];
+                                ?>
+                            </p>
+                            <p class="p2">
+                                <?php
+                                echo'Cantidad:', $produc["cantidad"];
+                                ?>
+                            </p>
                             <?php
-                            echo $produc["Nombre_prod"];
-                            echo $produc["cantidad"];
                             $cantidad = (int) $produc["cantidad"];
                             ?>
                             <a href="productos.php?id_producto=<?php echo $produc["id_producto"]; ?>"> + </a>
@@ -144,10 +164,19 @@
                         <?php
                         while ($produc = mysqli_fetch_array($resultado)) {
                             ?>
-                            <div>
+                            <div class="caja-producto">
+                                <figure class="img-producto"><!--img--></figure>
+                                <p class="p1">
+                                    <?php
+                                    echo  $produc["Nombre_prod"];
+                                    ?>
+                                </p>
+                                <p class="p2">
+                                    <?php
+                                    echo 'Cantidad:', $produc["cantidad"];
+                                    ?>
+                                </p>
                                 <?php
-                                echo $produc["Nombre_prod"];
-                                echo $produc["cantidad"];
                                 $cantidad = (int) $produc["cantidad"];
                                 ?>
                                 <a href="productos.php?id_producto=<?php echo $produc["id_producto"]; ?>"> + </a>

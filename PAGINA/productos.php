@@ -151,11 +151,16 @@
                                 echo $produc["Nombre_prod"];
                                 ?>
                             </p>
-                            <p class="p2">
-                                <?php
-                                echo'Cantidad:', $produc["cantidad"];
-                                ?>
-                            </p>
+                                <p class="p2">
+                                    <?php
+                                    echo 'Cantidad:', $produc["cantidad"];
+                                    ?>
+                                </p>
+                                <p class="p2">
+                                    <?php
+                                    echo 'Precio:', $produc["precio"];
+                                    ?>
+                                </p>
                             <?php
                             $cantidad = (int) $produc["cantidad"];
                             ?>
@@ -168,12 +173,17 @@
                                 <figure class="img-producto"><!--img--></figure>
                                 <p class="p1">
                                     <?php
-                                    echo  $produc["Nombre_prod"];
+                                    echo $produc["Nombre_prod"];
                                     ?>
                                 </p>
                                 <p class="p2">
                                     <?php
                                     echo 'Cantidad:', $produc["cantidad"];
+                                    ?>
+                                </p>
+                                <p class="p2">
+                                    <?php
+                                    echo 'Precio:', $produc["precio"];
                                     ?>
                                 </p>
                                 <?php

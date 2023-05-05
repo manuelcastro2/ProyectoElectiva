@@ -68,7 +68,7 @@
                     <?php
                     if (isset($_SESSION['id_usuario'])) {
                         $user = $usuario["correo"];
-                        $consulta = "SELECT * FROM compra WHERE id_usuario='$user'";
+                        $consulta = "SELECT DISTINCT * FROM compra WHERE id_usuario='$user'";
                         $resultado = mysqli_query($conn, $consulta);
                         $num = 0;
                         while ($fila = mysqli_fetch_assoc($resultado)) {
@@ -94,12 +94,14 @@
                 <?php
                 if (isset($_SESSION['id_usuario'])) {
                     $user = $usuario["correo"];
-                    $consulta = "SELECT * 
+                    $consulta = "SELECT DISTINCT *
                     FROM productos,compra
-                     where productos.id_producto=compra.id_producto
-                     and id_usuario='$user'";
+                    where productos.id_producto=compra.id_produ
+                    and id_usuario='$user'";
                     $resultado = mysqli_query($conn, $consulta);
+                    
                     while ($fila = mysqli_fetch_array($resultado)) {
+                       
                         ?>
                         <div class="card">
                             <p>
@@ -121,7 +123,7 @@
                                     </p>
                                     <p>
                                         <?php
-                                        echo $fila["cantidad"];
+                                        echo $fila["canti"]
                                         ?>
                                     </p>
                                     <p>
@@ -136,7 +138,7 @@
                             </div>
                         </div>
                         <?php
-                    }
+                        }
                 } else {
                     ?>
                     <h1>inicie sesion para ver los productos en el carrito</h1>
@@ -190,3 +192,14 @@
 </body>
 
 </html>
+<?php
+if (isset($_GET["id_producto"])) {
+ $cantidad--;
+ $sqlgrabar = "UPDATE productos SET  cantidad = '$cantidad' WHERE id_producto='$id_producto'";
+ if (mysqli_query($conn, $sqlgrabar)) {
+
+ } else {
+     echo '<script>alert("ERROR")</script>';
+ }
+}
+?>

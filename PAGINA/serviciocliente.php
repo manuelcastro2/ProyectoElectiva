@@ -26,7 +26,7 @@
                     if (isset($_SESSION['id_usuario'])) {
                         $id_usuario = $_SESSION["id_usuario"];
 
-                        $consulta = "SELECT * FROM clientes WHERE correo='$id_usuario'";
+                        $consulta = "SELECT  * FROM clientes WHERE correo='$id_usuario'";
                         $resultado = mysqli_query($conn, $consulta);
 
                         if (mysqli_num_rows($resultado) == 1) {
@@ -68,7 +68,7 @@
                     <?php
                     if (isset($_SESSION['id_usuario'])) {
                         $user = $usuario["correo"];
-                        $consulta = "SELECT * FROM compra WHERE id_usuario='$user'";
+                        $consulta = "SELECT DISTINCT * FROM compra WHERE id_usuario='$user'";
                         $resultado = mysqli_query($conn, $consulta);
                         $num = 0;
                         while ($fila = mysqli_fetch_assoc($resultado)) {

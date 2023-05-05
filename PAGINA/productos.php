@@ -68,7 +68,7 @@
                     <?php
                     if (isset($_SESSION['id_usuario'])) {
                         $user = $usuario["correo"];
-                        $consulta = "SELECT * FROM compra WHERE id_usuario='$user'";
+                        $consulta = "SELECT DISTINCT * FROM compra WHERE id_usuario='$user'";
                         $resultado = mysqli_query($conn, $consulta);
                         $num = 0;
                         while ($fila = mysqli_fetch_assoc($resultado)) {
@@ -151,16 +151,16 @@
                                 echo $produc["Nombre_prod"];
                                 ?>
                             </p>
-                                <p class="p2">
-                                    <?php
-                                    echo 'Cantidad:', $produc["cantidad"];
-                                    ?>
-                                </p>
-                                <p class="p2">
-                                    <?php
-                                    echo 'Precio:', $produc["precio"];
-                                    ?>
-                                </p>
+                            <p class="p2">
+                                <?php
+                                echo 'Cantidad:', $produc["cantidad"];
+                                ?>
+                            </p>
+                            <p class="p2">
+                                <?php
+                                echo 'Precio:', $produc["precio"];
+                                ?>
+                            </p>
                             <?php
                             $cantidad = (int) $produc["cantidad"];
                             ?>
@@ -244,21 +244,33 @@
 
 </html>
 <?php
+$aumento = 1;
 if (isset($_GET["id_producto"])) {
+    echo '<script>alert("le di")</script>';
+    $aumento++;
     $id_producto = $_GET["id_producto"];
-    $id_usuario = $usuario["correo"];
-    $consulta = "INSERT INTO compra(id_usuario, id_producto) 
-                           VALUES ('$id_usuario','$id_producto')";
-    $compra = mysqli_query($conn, $consulta);
-    if (mysqli_affected_rows($conn) > 0) {
-        echo '<script>alert("se agrego al carrito")</script>';
+    $user = $usuario["correo"];
+    $consulta = "SELECT * FROM compra WHERE id_usuario='$user'";
+    $resultado = mysqli_query($conn, $consulta);
+    while($fila = mysqli_fetch_array($resultado)){
+        if ($id_producto == $fila["id_produ"]) {
+            $aumento++;
+            $consulta = "UPDATE compra
+            SET canti='$aumento' where id_usuario='$id_usuario' and id_produ='$id_producto'";
+            $compra = mysqli_query($conn, $consulta);
+            if (mysqli_affected_rows($conn) > 0) {
+                echo '<script>alert("se actualizo el carrito")</script>';
+            }
+        } else if($id_producto != $fila["id_produ"]) {
+            $id_usuario = $usuario["correo"];
+            $consulta = "INSERT INTO compra(id_usuario, id_produ,canti) 
+                               VALUES ('$id_usuario','$id_producto','$aumento')";
+            $compra = mysqli_query($conn, $consulta);
+            if (mysqli_affected_rows($conn) > 0) {
+                echo '<script>alert("se agrego al carrito")</script>';
+            }
+        }
     }
-    $cantidad--;
-    $sqlgrabar = "UPDATE productos SET  cantidad = '$cantidad' WHERE id_producto='$id_producto'";
-    if (mysqli_query($conn, $sqlgrabar)) {
 
-    } else {
-        echo '<script>alert("ERROR")</script>';
-    }
 }
 ?>

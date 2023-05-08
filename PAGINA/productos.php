@@ -44,7 +44,7 @@
                                 <?php echo $usuario["usuario"]; ?>
                             </summary>
                             <a href="paginausuario.php?correo=<?php echo $usuario["correo"]; ?>">perfil</a>
-                            <form acttion="#" method="post">
+                            <form action="#" method="post">
                                 <button type="submit" name="cerrar" id="cerrar">CERRAR SESION</button>
                             </form>
                         </details>
@@ -130,10 +130,16 @@
                             </p>
                             <p class="p2">
                                 <?php
+                                echo 'Precio:', $produc["precio"];
+                                ?>
+                            </p>
+                            <p class="p2">
+                                <?php
                                 echo 'Cantidad:', $produc["cantidad"];
                                 ?>
                             </p>
                             <?php
+
                             $cantidad = (int) $produc["cantidad"];
                             ?>
                             <a href="productos.php?id_producto=<?php echo $produc["id_producto"]; ?>"> + </a>
@@ -239,37 +245,38 @@
             </div>
         </main>
     </div>
-
-</body>
-
-</html>
-<?php
-$aumento = 0;
-if (isset($_GET["id_producto"])) {
-    echo '<script>alert("le di")</script>';
-    $aumento++;
-    $id_producto = $_GET["id_producto"];
-    $user = $usuario["correo"];
-    $consulta = "SELECT * FROM compra WHERE id_usuario='$user'";
-    $resultado = mysqli_query($conn, $consulta);
-    while(count($fila = mysqli_fetch_array($resultado))) {
-        if ($id_producto == $fila["id_produ"]) {
-            $aumento++;
-            $consulta = "UPDATE compra
-            SET canti='$aumento' where id_usuario='$id_usuario' and id_produ='$id_producto'";
-            $compra = mysqli_query($conn, $consulta);
-            if (mysqli_affected_rows($conn) > 0) {
-                echo '<script>alert("se actualizo el carrito")</script>';
+    <?php
+    if (isset($_GET["id_producto"])) {
+        $id_producto = $_GET["id_producto"];
+        $user = $usuario["correo"];
+        $aumento = 0;
+        $consulta = "SELECT * FROM compra WHERE id_usuario='$user' and id_produ='$id_producto'";
+        $resultado = mysqli_query($conn, $consulta);
+        $filo = mysqli_num_rows($resultado);
+        if ($filo > 0) {
+            while ($fila = mysqli_fetch_array($resultado)) {
+                if (intval($fila["id_produ"]) == intval($id_producto)) {
+                    $aumento = 1 + $fila["canti"];
+                    $consulta = "UPDATE compra
+                SET canti='$aumento' where id_usuario='$user' and id_produ='$id_producto'";
+                    $compra = mysqli_query($conn, $consulta);
+                    if (mysqli_affected_rows($conn) > 0) {
+                        echo '<script>alert("se actualizo el carrito")</script>';
+                        break;
+                    }
+                }
             }
-        } else{
-            $id_usuario = $usuario["correo"];
-            $consulta = "INSERT INTO compra(id_usuario, id_produ,canti) 
-                               VALUES ('$id_usuario','$id_producto','$aumento')";
+        } else {
+            $aumento++;
+            $consulta = "INSERT INTO compra(id_usuario,id_produ,canti) 
+                               VALUES ('$user','$id_producto','$aumento')";
             $compra = mysqli_query($conn, $consulta);
             if (mysqli_affected_rows($conn) > 0) {
                 echo '<script>alert("se agrego al carrito")</script>';
             }
         }
     }
-}
-?>
+    ?>
+</body>
+
+</html>

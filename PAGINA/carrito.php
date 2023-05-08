@@ -44,7 +44,7 @@
                                 <?php echo $usuario["usuario"]; ?>
                             </summary>
                             <a href="paginausuario.php?correo=<?php echo $usuario["correo"]; ?>">perfil</a>
-                            <form acttion="#" method="post">
+                            <form method="post">
                                 <button type="submit" name="cerrar" id="cerrar">CERRAR SESION</button>
                             </form>
                         </details>
@@ -99,9 +99,9 @@
                     where productos.id_producto=compra.id_produ
                     and id_usuario='$user'";
                     $resultado = mysqli_query($conn, $consulta);
-                    
+
                     while ($fila = mysqli_fetch_array($resultado)) {
-                       
+
                         ?>
                         <div class="card">
                             <p>
@@ -123,8 +123,9 @@
                                     </p>
                                     <p>
                                         <?php
-                                        echo $fila["canti"]
-                                        ?>
+                                        echo $fila["canti"];
+                                        $va = 0 + $fila["canti"]
+                                            ?>
                                     </p>
                                     <p>
                                         <?php
@@ -132,13 +133,27 @@
                                         ?>
                                     </p>
                                     <p>
-                                        <a href="">ELIMINAR</a>
+                                    <form method="post">
+                                        <p>Cambiar</p>
+                                        <select name="disminuir" id="disminuir">
+                                            <?php
+                                            for ($num = 1; $num <= $va; $num++) {
+                                                ?>
+                                                <option value="">
+                                                    <?php echo $num;
+                                                    ?>
+                                                </option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </form>
                                     </p>
                                 </div>
                             </div>
                         </div>
                         <?php
-                        }
+                    }
                 } else {
                     ?>
                     <h1>inicie sesion para ver los productos en el carrito</h1>
@@ -194,12 +209,12 @@
 </html>
 <?php
 if (isset($_GET["id_producto"])) {
- $cantidad--;
- $sqlgrabar = "UPDATE productos SET  cantidad = '$cantidad' WHERE id_producto='$id_producto'";
- if (mysqli_query($conn, $sqlgrabar)) {
+    $cantidad--;
+    $sqlgrabar = "UPDATE productos SET  cantidad = '$cantidad' WHERE id_producto='$id_producto'";
+    if (mysqli_query($conn, $sqlgrabar)) {
 
- } else {
-     echo '<script>alert("ERROR")</script>';
- }
+    } else {
+        echo '<script>alert("ERROR")</script>';
+    }
 }
 ?>

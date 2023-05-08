@@ -244,7 +244,7 @@
 
 </html>
 <?php
-$aumento = 1;
+$aumento = 0;
 if (isset($_GET["id_producto"])) {
     echo '<script>alert("le di")</script>';
     $aumento++;
@@ -252,7 +252,7 @@ if (isset($_GET["id_producto"])) {
     $user = $usuario["correo"];
     $consulta = "SELECT * FROM compra WHERE id_usuario='$user'";
     $resultado = mysqli_query($conn, $consulta);
-    while($fila = mysqli_fetch_array($resultado)){
+    while(count($fila = mysqli_fetch_array($resultado))) {
         if ($id_producto == $fila["id_produ"]) {
             $aumento++;
             $consulta = "UPDATE compra
@@ -261,7 +261,7 @@ if (isset($_GET["id_producto"])) {
             if (mysqli_affected_rows($conn) > 0) {
                 echo '<script>alert("se actualizo el carrito")</script>';
             }
-        } else if($id_producto != $fila["id_produ"]) {
+        } else{
             $id_usuario = $usuario["correo"];
             $consulta = "INSERT INTO compra(id_usuario, id_produ,canti) 
                                VALUES ('$id_usuario','$id_producto','$aumento')";
@@ -271,6 +271,5 @@ if (isset($_GET["id_producto"])) {
             }
         }
     }
-
 }
 ?>

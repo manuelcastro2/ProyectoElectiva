@@ -115,40 +115,26 @@
                                     echo $fila["Nombre_prod"];
                                     ?>
                                 </p>
-                                <div>
+                                <div class="conte">
                                     <p>
                                         <?php
-                                        echo $fila["precio"];
+                                        $numeroFormateado = number_format($fila["precio"], 0);
+                                        echo "$", strval($numeroFormateado);
                                         ?>
                                     </p>
                                     <p>
                                         <?php
                                         echo $fila["canti"];
-                                        $va = 0 + $fila["canti"]
-                                            ?>
-                                    </p>
-                                    <p>
-                                        <?php
-                                        echo $fila["precio"];
                                         ?>
                                     </p>
                                     <p>
-                                    <form method="post">
-                                        <p>Cambiar</p>
-                                        <select name="disminuir" id="disminuir">
-                                            <?php
-                                            for ($num = 1; $num <= $va; $num++) {
-                                                ?>
-                                                <option value="">
-                                                    <?php echo $num;
-                                                    ?>
-                                                </option>
-                                                <?php
-                                            }
-                                            ?>
-                                        </select>
-                                    </form>
+                                        <?php
+                                        $total = $fila["canti"] * $fila["precio"];
+                                        $numeroFormateado = number_format($total, 0);
+                                        echo "$", strval($numeroFormateado);
+                                        ?>
                                     </p>
+                                    <button type="submit" class="cambio" id="cambiar">cambiar</button>
                                 </div>
                             </div>
                         </div>
@@ -203,18 +189,10 @@
             </div>
         </main>
     </div>
+    <div id="caja" class="caja-modificar">
 
+    </div>
+    <script type="text/javascript" src="../JS/acciones.js"></script>
 </body>
 
 </html>
-<?php
-if (isset($_GET["id_producto"])) {
-    $cantidad--;
-    $sqlgrabar = "UPDATE productos SET  cantidad = '$cantidad' WHERE id_producto='$id_producto'";
-    if (mysqli_query($conn, $sqlgrabar)) {
-
-    } else {
-        echo '<script>alert("ERROR")</script>';
-    }
-}
-?>

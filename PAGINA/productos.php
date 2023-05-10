@@ -255,8 +255,8 @@
         $filo = mysqli_num_rows($resultado);
         if ($filo > 0) {
             while ($fila = mysqli_fetch_array($resultado)) {
-                if (intval($fila["id_produ"]) == intval($id_producto)) {
-                    $aumento = 1 + $fila["canti"];
+                $aumento = 1 + $fila["canti"];
+                if (intval($fila["id_produ"]) == intval($id_producto)&& intval($fila["canti"])>=$aumento) {
                     $consulta = "UPDATE compra
                 SET canti='$aumento' where id_usuario='$user' and id_produ='$id_producto'";
                     $compra = mysqli_query($conn, $consulta);
@@ -264,9 +264,11 @@
                         echo '<script>alert("se actualizo el carrito")</script>';
                         break;
                     }
+                }else{
+                    echo '<script>alert("cupo de productos lleno")</script>';
                 }
             }
-        } else {
+        } else{
             $aumento++;
             $consulta = "INSERT INTO compra(id_usuario,id_produ,canti) 
                                VALUES ('$user','$id_producto','$aumento')";

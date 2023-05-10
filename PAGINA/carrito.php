@@ -119,7 +119,7 @@
                                     <p>
                                         <?php
                                         $numeroFormateado = number_format($fila["precio"], 0);
-                                        echo "$", strval($numeroFormateado);
+                                        echo "$ ", strval($numeroFormateado);
                                         ?>
                                     </p>
                                     <p>
@@ -131,10 +131,12 @@
                                         <?php
                                         $total = $fila["canti"] * $fila["precio"];
                                         $numeroFormateado = number_format($total, 0);
-                                        echo "$", strval($numeroFormateado);
+                                        echo "$ ", strval($numeroFormateado);
                                         ?>
                                     </p>
-                                    <button type="submit" class="cambio" id="cambiar">cambiar</button>
+                                    <p>
+                                        <button type="submit" class="cambio" id="cambiar">cambiar</button>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -190,7 +192,9 @@
         </main>
     </div>
     <div id="caja" class="caja-modificar">
-
+        <div id="caja_modificar" class="caja-modificacion">
+            a
+        </div>
     </div>
     <script type="text/javascript" src="../JS/acciones.js"></script>
 </body>

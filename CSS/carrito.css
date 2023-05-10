@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    border: none;
 }
 
 body {
@@ -565,12 +566,23 @@ main {
     width: 100%;
     height: 100%;
     background: white;
+    opacity: 0.5;
     top: 0;
-    left: -1000px;
-    z-index: 20;
+    left: -100000px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.conte>p{
+.caja-modificacion{
+    width: 50%;
+    height: 50%;
+    background: white;
+    position: absolute;
+    left: -10000px;
+}
+
+.conte>p {
     width: auto;
     height: auto;
 }

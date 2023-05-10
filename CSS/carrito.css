@@ -486,7 +486,8 @@ main {
 .card>p {
     border-bottom: 1.2px solid #e3e3e3;
     width: 95%;
-    height: 50px;
+    padding: 10px 0;
+    font-weight: 600;
 }
 
 .contenido section {
@@ -540,20 +541,6 @@ main {
     width: 40%;
 }
 
-.cambio {
-    position: relative;
-    margin-right: 40px;
-    border-radius: 5px;
-    padding: 5px 10px;
-    border: 1px solid black;
-    background-color: white;
-    color: black;
-}
-
-.cambio:focus {
-    border: 1px solid #007bff;
-}
-
 .card div>div {
     display: flex;
     justify-content: center;
@@ -561,28 +548,66 @@ main {
     width: 58%;
 }
 
-.caja-modificar {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: white;
-    opacity: 0.5;
-    top: 0;
-    left: -100000px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.caja-modificacion{
-    width: 50%;
-    height: 50%;
-    background: white;
-    position: absolute;
-    left: -10000px;
-}
 
 .conte>p {
     width: auto;
     height: auto;
+}
+
+.cambio {
+    text-decoration: none;
+    font-weight: 900;
+    font-size: 25px;
+    color: black;
+    transition: all 0.4s ease-in-out;
+}
+
+.cambio:hover {
+    transform: scale(1.3, 1.3);
+}
+
+.cambio:focus {
+    color: #007bff;
+}
+
+.mensaje {
+    height: 30%;
+    width: 40%;
+    background: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.mensaje p {
+    font-size: 25px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.mensaje a {
+    text-decoration: none;
+    color: #007bff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #007bff;
+    background: white;
+}
+
+.mensaje a:focus {
+    color: #f45050;
+    border-color: #f45050;
+}
+
+.caja-mensaje {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    position: absolute;
+    background: rgb(0, 0, 0, 0.5);
 }

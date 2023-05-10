@@ -135,7 +135,8 @@
                                         ?>
                                     </p>
                                     <p>
-                                        <button type="submit" class="cambio" id="cambiar">cambiar</button>
+                                        <a class="cambio" href="carrito.php?aumento=<?php echo $fila["id_producto"]; ?>">+</a>
+                                        <a class="cambio" href="carrito.php?disminuir=<?php echo $fila["id_producto"] ?>">-</a>
                                     </p>
                                 </div>
                             </div>
@@ -190,13 +191,90 @@
                 </div>
             </div>
         </main>
+        <?php
+        if (isset($_GET["aumento"])) {
+            $user = $usuario["correo"];
+            $au = $_GET["aumento"];
+            $consulta = "SELECT * FROM compra,productos where productos.id_producto=compra.id_produ
+        and id_usuario='$user' and id_produ='$au'";
+            $resultado = mysqli_query($conn, $consulta);
+            $filo = mysqli_num_rows($resultado);
+            if ($filo > 0) {
+                while ($fila = mysqli_fetch_array($resultado)) {
+                    $aumento = 1 + $fila["canti"];
+                    if (intval($fila["cantidad"]) >= $aumento) {
+                        $consulta = "UPDATE compra
+                    SET canti='$aumento' where id_usuario='$user' and id_produ='$au'";
+                        $compra = mysqli_query($conn, $consulta);
+                        if (mysqli_affected_rows($conn) > 0) {
+                            ?>
+                            <div class="caja-mensaje">
+                                <div class="mensaje">
+                                    <p>se aumento</p>
+                                    <a href="carrito.php">Cerrar</a>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                    } else {
+                        ?>
+                        <div class="caja-mensaje">
+                            <div class="mensaje">
+                                <p>no se puede aumentar mas</p>
+                                <a href="carrito.php">Cerrar</a>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                }
+            } else {
+                echo '<script>alert("error")</script>';
+            }
+        } else if (isset($_GET["disminuir"])) {
+            $user = $usuario["correo"];
+            $au = $_GET["disminuir"];
+            $consulta = "SELECT * FROM compra,productos where productos.id_producto=compra.id_produ
+        and id_usuario='$user' and id_produ='$au'";
+            $resultado = mysqli_query($conn, $consulta);
+            $filo = mysqli_num_rows($resultado);
+            if ($filo > 0) {
+                while ($fila = mysqli_fetch_array($resultado)) {
+                    $aumento = -1 + $fila["canti"];
+                    if ($aumento > 0) {
+                        $consulta = "UPDATE compra
+                    SET canti='$aumento' where id_usuario='$user' and id_produ='$au'";
+                        $compra = mysqli_query($conn, $consulta);
+                        if (mysqli_affected_rows($conn) > 0) {
+                            ?>
+                                <div class="caja-mensaje">
+                                    <div class="mensaje">
+                                        <p>se disminuyo</p>
+                                        <a href="carrito.php">Cerrar</a>
+                                    </div>
+                                </div>
+                            <?php
+                        }
+                    } else {
+                        $consulta = "DELETE from compra where id_usuario='$user' and id_produ='$au'";
+                        $compra = mysqli_query($conn, $consulta);
+                        if (mysqli_affected_rows($conn) > 0) {
+                            ?>
+                                <div class="caja-mensaje">
+                                    <div class="mensaje">
+                                        <p>se quito producto</p>
+                                        <a href="carrito.php">Cerrar</a>
+                                    </div>
+                                </div>
+                            <?php
+                        }
+                    }
+                }
+            } else {
+                echo '<script>alert("error")</script>';
+            }
+        }
+        ?>
     </div>
-    <div id="caja" class="caja-modificar">
-        <div id="caja_modificar" class="caja-modificacion">
-            a
-        </div>
-    </div>
-    <script type="text/javascript" src="../JS/acciones.js"></script>
 </body>
 
 </html>

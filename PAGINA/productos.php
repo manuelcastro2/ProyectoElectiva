@@ -244,41 +244,62 @@
                 </div>
             </div>
         </main>
-    </div>
-    <?php
-    if (isset($_GET["id_producto"])) {
-        $id_producto = $_GET["id_producto"];
-        $user = $usuario["correo"];
-        $aumento = 0;
-        $consulta = "SELECT * FROM compra WHERE id_usuario='$user' and id_produ='$id_producto'";
-        $resultado = mysqli_query($conn, $consulta);
-        $filo = mysqli_num_rows($resultado);
-        if ($filo > 0) {
-            while ($fila = mysqli_fetch_array($resultado)) {
-                $aumento = 1 + $fila["canti"];
-                if (intval($fila["id_produ"]) == intval($id_producto)&& intval($fila["canti"])>=$aumento) {
-                    $consulta = "UPDATE compra
+        <?php
+        if (isset($_GET["id_producto"])) {
+            $id_producto = $_GET["id_producto"];
+            $user = $usuario["correo"];
+            $aumento = 0;
+            $consulta = "SELECT * FROM compra,productos WHERE productos.id_producto=compra.id_produ
+            and id_usuario='$user' and id_produ='$id_producto'";
+            $resultado = mysqli_query($conn, $consulta);
+            $filo = mysqli_num_rows($resultado);
+            if ($filo > 0) {
+                while ($fila = mysqli_fetch_array($resultado)) {
+                    $aumento = 1 + $fila["canti"];
+                    if (intval($fila["id_produ"]) == intval($id_producto) && intval($fila["cantidad"]) >= $aumento) {
+                        $consulta = "UPDATE compra
                 SET canti='$aumento' where id_usuario='$user' and id_produ='$id_producto'";
-                    $compra = mysqli_query($conn, $consulta);
-                    if (mysqli_affected_rows($conn) > 0) {
-                        echo '<script>alert("se actualizo el carrito")</script>';
-                        break;
+                        $compra = mysqli_query($conn, $consulta);
+                        if (mysqli_affected_rows($conn) > 0) {
+                            ?>
+                            <div class="caja-mensaje">
+                                <div class="mensaje">
+                                    <p>se actualizo el carrito</p>
+                                    <a href="productos.php">Cerrar</a>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                    } else {
+                        ?>
+                        <div class="caja-mensaje">
+                            <div class="mensaje">
+                                <p>se lleno el cupo</p>
+                                <a href="carrito.php">Cerrar</a>
+                            </div>
+                        </div>
+                        <?php
                     }
-                }else{
-                    echo '<script>alert("cupo de productos lleno")</script>';
+                }
+            } else {
+                $aumento++;
+                $consulta = "INSERT INTO compra(id_usuario,id_produ,canti) 
+                               VALUES ('$user','$id_producto','$aumento')";
+                $compra = mysqli_query($conn, $consulta);
+                if (mysqli_affected_rows($conn) > 0) {
+                    ?>
+                    <div class="caja-mensaje">
+                        <div class="mensaje">
+                            <p>se agrego al carrito</p>
+                            <a href="productos.php">Cerrar</a>
+                        </div>
+                    </div>
+                    <?php
                 }
             }
-        } else{
-            $aumento++;
-            $consulta = "INSERT INTO compra(id_usuario,id_produ,canti) 
-                               VALUES ('$user','$id_producto','$aumento')";
-            $compra = mysqli_query($conn, $consulta);
-            if (mysqli_affected_rows($conn) > 0) {
-                echo '<script>alert("se agrego al carrito")</script>';
-            }
         }
-    }
-    ?>
+        ?>
+    </div>
 </body>
 
 </html>

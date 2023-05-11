@@ -82,9 +82,9 @@
                     and id_usuario='$user'";
                         $resultado = mysqli_query($conn, $consulta);
 
-                        $a = 0;
+
                         while ($fila = mysqli_fetch_array($resultado)) {
-                            $a++;
+
                             ?>
                             <div class="card">
                                 <p>

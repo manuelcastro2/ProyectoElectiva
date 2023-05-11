@@ -49,32 +49,165 @@
                         <a class="button" href="../ESTRUTURE/inicio.php">INICIO SESION</a>
                         <?php
                     }
+                    $consulta1 = "SELECT * FROM compra,productos 
+                    where productos.id_producto=compra.id_produ 
+                    and id_usuario='$id_usuario'";
+                    $resultado1 = mysqli_query($conn, $consulta1);
                     ?>
                 </nav>
             </div>
         </header>
-        <?php
-        if (isset($_POST["btnpagar"])) {
-            $consulta1 = "SELECT * FROM compra";
-            $resultado1 = mysqli_query($conn, $consulta1);
-            ?>
-            <p>
-                <?php
-                echo $usuario["usuario"]," ",$usuario["direccion"]
-                ?>
-            </p>
-            <p>
-                productos seleccionados
-            </p>
+        <main>
             <?php
-            while ($fila = mysqli_fetch_array($resultado1)) {
-                switch ($fila["id_produ"]) {
-                    case $_POST[$fila["id_produ"]]:
-                        echo $_POST[$fila["id_produ"]];
+            if (isset($_POST["btnpagar"])) {
+                ?>
+                <div>
+                    <p>
+                        Direccion de entrega
+                    </p>
+                    <p>
+                        <?php
+                        echo $usuario["usuario"], " ", $usuario["telefono"], " ", $usuario["direccion"];
+                        ?>
+                    </p>
+                </div>
+                <p>
+                    productos seleccionados
+                </p>
+                <?php
+                $tot = 0;
+                while ($fila = mysqli_fetch_array($resultado1)) {
+                    if (isset($_POST[$fila["id_produ"]])) {
+                        switch ($fila["id_produ"]) {
+                            case $_POST[$fila["id_produ"]]:
+                                ?>
+                                <div class="card">
+                                    <p>
+                                        <?php
+                                        echo $fila["tipo_produc"];
+                                        ?>
+                                    </p>
+                                    <div>
+                                        <p class="produ">
+                                            <?php
+                                            echo $fila["Nombre_prod"];
+                                            ?>
+                                        </p>
+                                        <div class="conte">
+                                            <p class=produ2>
+                                                <?php
+                                                $numeroFormateado = number_format($fila["precio"], 0);
+                                                echo "$ ", strval($numeroFormateado);
+                                                ?>
+                                            </p>
+                                            <p class=produ2>
+                                                <?php
+                                                echo $fila["canti"];
+                                                ?>
+                                            </p>
+                                            <p class=produ2>
+                                                <?php
+                                                $total = $fila["canti"] * $fila["precio"];
+                                                $tot = $tot + $total;
+                                                $numeroFormateado = number_format($total, 0);
+                                                echo "$ ", strval($numeroFormateado);
+                                                ?>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php
+                        }
+                    }
                 }
             }
-        }
-        ?>
+            ?>
+            <form method="post">
+                <div>
+                    <p>metodos de pago</p>
+                    <div>
+                        <label for="nequi"><input type="radio" id="nequi" name="pago" value="nequi"
+                                checked>Nequi</label>
+                        <label for="daviplata"><input type="radio" id="daviplata" name="pago"
+                                value="daviplata">Daviplata</label>
+                        <label for="bancolombia"><input type="radio" id="bancolombia" name="pago"
+                                value="bancolombia">Bancolombia</label>
+                    </div>
+                </div>
+                <div>
+                    <?php
+                    $envio = 8000;
+                    $totalpagar = $tot + $envio;
+                    $numeroFormateado = number_format($tot, 0);
+                    $numeroFormateado2 = number_format($envio, 0);
+                    $numeroFormateado3 = number_format($totalpagar, 0);
+                    ?>
+                    <p>
+                        <span>
+                            <?php
+                            echo "SUBTOTAL: ", "$ ";
+                            ?>
+                        </span>
+                        <span>
+                            <?php
+                            echo strval($numeroFormateado);
+                            ?>
+                        </span>
+                    </p>
+                    <p>
+                        <span>
+                            <?php
+                            echo "TOTAL ENVIO: $";
+                            ?>
+                        </span>
+                        <span>
+                            <?php
+                            echo strval($numeroFormateado2);
+                            ?>
+                        </span>
+                    </p>
+                    <p>
+                        <span>
+                            <?php
+                            echo "TOTAL: $";
+                            ?>
+                        </span>
+                        <span>
+                            <?php
+                            echo strval($numeroFormateado3);
+                            ?>
+                        </span>
+                    </p>
+                </div>
+                <div>
+                    <button name="enviarpago" id="enviarpago" type="submit">PAGAR</button>
+                </div>
+            </form>
+            <?php
+            if (isset($_POST["enviarpago"])) {
+                while ($fila = mysqli_fetch_array($resultado1)) {
+                    if (isset($_POST[$fila["id_produ"]])) {
+                        switch ($fila["id_produ"]) {
+                            case $_POST[$fila["id_produ"]]:
+                                $au = $_POST[$fila["id_produ"]];
+                                $consulta = "DELETE from compra where id_usuario='$id_usuario' and id_produ='$au'";
+                                $compra = mysqli_query($conn, $consulta);
+                                if (mysqli_affected_rows($conn) > 0) {
+                                }
+                        }
+                    }
+                }
+                ?>
+                <div class="caja-mensaje">
+                    <div class="mensaje">
+                        <p>SE REALIZO EL PEDIDO CORRECTAMENTE</p>
+                        <a href="carrito.php">Cerrar</a>
+                    </div>
+                </div>
+                <?php
+            }
+            ?>
+        </main>
     </div>
 </body>
 

@@ -14,12 +14,13 @@
     <div class="caja-todo">
         <header>
             <div class="encabezado">
+                <a href="productos.php">
                 <span></span>
+                </a>
                 <nav>
-                    <a class="navegador item tres" href="../index.php">INICIO</a>
-                    <a class="navegador item tres" href="conocenos.php">CONOCENOS</a>
-                    <a class="navegador item tres" href="serviciocliente.php">SERVICIO AL CLIENTE</a>
-                    <a class="navegador item tres" href="productos.php">PRODUCTOS</a>
+                    <div class="footer">
+                        <input type="search" name="buscador" id="buscador">
+                    </div>
                     <?php
                     include("../CONEXION/conexion.php");
                     session_start();
@@ -58,27 +59,7 @@
                     ?>
                 </nav>
             </div>
-            <div class="footer">
-                <input type="search" name="buscador" id="buscador">
-                <a href="">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
-                        <path
-                            d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
-                    </svg>
-                    <?php
-                    if (isset($_SESSION['id_usuario'])) {
-                        $user = $usuario["correo"];
-                        $consulta = "SELECT DISTINCT * FROM compra WHERE id_usuario='$user'";
-                        $resultado = mysqli_query($conn, $consulta);
-                        $num = 0;
-                        while ($fila = mysqli_fetch_assoc($resultado)) {
-                            $num++;
-                        }
-                        echo $num;
-                    }
-                    ?>
-                </a>
-            </div>
+
         </header>
         <main>
             <div class="contenido">
@@ -91,64 +72,77 @@
                         <p>Acciones</p>
                     </div>
                 </section>
-                <?php
-                if (isset($_SESSION['id_usuario'])) {
-                    $user = $usuario["correo"];
-                    $consulta = "SELECT DISTINCT *
+                <form method="post" action="pagar.php">
+                    <?php
+                    if (isset($_SESSION['id_usuario'])) {
+                        $user = $usuario["correo"];
+                        $consulta = "SELECT DISTINCT *
                     FROM productos,compra
                     where productos.id_producto=compra.id_produ
                     and id_usuario='$user'";
-                    $resultado = mysqli_query($conn, $consulta);
+                        $resultado = mysqli_query($conn, $consulta);
 
-                    while ($fila = mysqli_fetch_array($resultado)) {
-
-                        ?>
-                        <div class="card">
-                            <p>
-                                <?php
-                                echo $fila["tipo_produc"];
-                                ?>
-                            </p>
-                            <div>
+                        $a = 0;
+                        while ($fila = mysqli_fetch_array($resultado)) {
+                            $a++;
+                            ?>
+                            <div class="card">
                                 <p>
                                     <?php
-                                    echo $fila["Nombre_prod"];
+                                    echo $fila["tipo_produc"];
                                     ?>
                                 </p>
-                                <div class="conte">
-                                    <p>
+                                <div>
+                                    <p class="produ">
+                                        <input type="checkbox" name="<?php echo $fila["id_producto"]; ?>"
+                                            value="<?php echo $fila["id_producto"]; ?>">
                                         <?php
-                                        $numeroFormateado = number_format($fila["precio"], 0);
-                                        echo "$ ", strval($numeroFormateado);
+                                        echo $fila["Nombre_prod"];
                                         ?>
                                     </p>
-                                    <p>
-                                        <?php
-                                        echo $fila["canti"];
-                                        ?>
-                                    </p>
-                                    <p>
-                                        <?php
-                                        $total = $fila["canti"] * $fila["precio"];
-                                        $numeroFormateado = number_format($total, 0);
-                                        echo "$ ", strval($numeroFormateado);
-                                        ?>
-                                    </p>
-                                    <p>
-                                        <a class="cambio" href="carrito.php?aumento=<?php echo $fila["id_producto"]; ?>">+</a>
-                                        <a class="cambio" href="carrito.php?disminuir=<?php echo $fila["id_producto"] ?>">-</a>
-                                    </p>
+                                    <div class="conte">
+                                        <p class=produ2>
+                                            <?php
+                                            $numeroFormateado = number_format($fila["precio"], 0);
+                                            echo "$ ", strval($numeroFormateado);
+                                            ?>
+                                        </p>
+                                        <p class=produ2>
+                                            <?php
+                                            echo $fila["canti"];
+                                            ?>
+                                        </p>
+                                        <p class=produ2>
+                                            <?php
+                                            $total = $fila["canti"] * $fila["precio"];
+                                            $numeroFormateado = number_format($total, 0);
+                                            echo "$ ", strval($numeroFormateado);
+                                            ?>
+                                        </p>
+                                        <p class=produ2>
+                                            <a class="cambio"
+                                                href="carrito.php?aumento=<?php echo $fila["id_producto"]; ?>">+</a>
+                                            <a class="cambio"
+                                                href="carrito.php?disminuir=<?php echo $fila["id_producto"] ?>">-</a>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
+                            <?php
+                        }
+                        ?>
+                        <div class="caja-pagar">
+                            <button type="submit" name="btnpagar" id="btnpagar">CONTINUAR</button>
                         </div>
                         <?php
+                    } else {
+                        ?>
+                        <h1>inicie sesion para ver los productos en el carrito</h1>
+                        <?php
                     }
-                } else {
                     ?>
-                    <h1>inicie sesion para ver los productos en el carrito</h1>
-                    <?php
-                }
-                ?>
+                </form>
+
             </div>
             <div class="pie-pagina">
                 <div class="caja-enlace">

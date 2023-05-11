@@ -37,7 +37,7 @@ header {
     align-items: center;
 }
 
-header span {
+.encabezado>a {
     background-image: url(../IMG/logo-removebg-preview2.png);
     background-repeat: no-repeat;
     background-size: cover;
@@ -45,14 +45,13 @@ header span {
     height: 100px;
     position: relative;
     left: 30px;
-    top: 30px;
+    top: -10px;
 }
 
 header nav {
     display: flex;
     align-items: center;
-    margin: 0 30px;
-    gap: 0 25px;
+
 }
 
 nav a {
@@ -104,6 +103,7 @@ nav a {
     text-transform: uppercase;
     overflow: hidden;
     transition: .5s;
+    margin-right: 20px;
 }
 
 .button:hover {
@@ -114,6 +114,11 @@ nav a {
         0 0 25px #001233,
         0 0 50px #001233,
         0 0 100px #001233;
+}
+.menu{
+    margin-right: 30px;
+    position: relative;
+    top: -40px;
 }
 
 .menu summary {
@@ -172,7 +177,7 @@ nav a {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 800px;
     height: 80px;
 }
 
@@ -181,7 +186,7 @@ nav a {
     border-radius: 5px;
     outline: none 0;
     border: 0px;
-    width: 60%;
+    width: 80%;
     padding: 12px 0;
     margin-right: 10px;
     transition: all .3 ease-in-out;
@@ -458,7 +463,7 @@ main {
     width: 100%;
     min-height: 350px;
     height: 100%;
-    gap: 25px 0;
+    gap: 20px 0;
 
 }
 
@@ -479,8 +484,18 @@ main {
     align-items: center;
     background-color: white;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
+    min-width: 100%;
+    min-height: 230px;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+form {
     width: 94%;
-    height: 230px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .card>p {
@@ -530,13 +545,13 @@ main {
     display: flex;
 }
 
-.card div>p {
+.card div>.produ2 {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
-    left: 35px;
+    left: 7px;
     text-align: left;
     width: 40%;
 }
@@ -545,7 +560,7 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 58%;
+    width: 60%;
 }
 
 
@@ -610,4 +625,45 @@ main {
     z-index: 1;
     position: absolute;
     background: rgb(0, 0, 0, 0.5);
+}
+
+.caja-pagar {
+    width: 200px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.caja-pagar button {
+    width: 100%;
+    padding: 20px 0;
+    background: white;
+    text-decoration: none;
+    font-weight: 700;
+    text-align: center;
+    color: #0c0c0c;
+    border: 1px solid #0c0c0c;
+    border-radius: 20px;
+    transition: all .4s ease-in-out;
+}
+
+.caja-pagar button:focus {
+    color: #007bff;
+    border: 2px solid #007bff;
+}
+
+.caja-pagar button:hover {
+    color: #007bff;
+}
+
+.produ {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    position: relative;
+    left: 35px;
+    text-align: left;
+    width: 40%;
+    gap: 50px;
 }

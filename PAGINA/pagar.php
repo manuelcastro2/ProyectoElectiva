@@ -12,8 +12,8 @@
     <div class="caja-todo">
         <header>
             <div class="encabezado">
-                <a href="productos.php">
-                </a>
+                <span>
+                </span>
                 <nav>
                     <?php
                     include("../CONEXION/conexion.php");
@@ -49,15 +49,30 @@
                         <a class="button" href="../ESTRUTURE/inicio.php">INICIO SESION</a>
                         <?php
                     }
-
                     ?>
                 </nav>
             </div>
-
         </header>
         <?php
         if (isset($_POST["btnpagar"])) {
-            echo $_POST["2"];
+            $consulta1 = "SELECT * FROM compra";
+            $resultado1 = mysqli_query($conn, $consulta1);
+            ?>
+            <p>
+                <?php
+                echo $usuario["usuario"]," ",$usuario["direccion"]
+                ?>
+            </p>
+            <p>
+                productos seleccionados
+            </p>
+            <?php
+            while ($fila = mysqli_fetch_array($resultado1)) {
+                switch ($fila["id_produ"]) {
+                    case $_POST[$fila["id_produ"]]:
+                        echo $_POST[$fila["id_produ"]];
+                }
+            }
         }
         ?>
     </div>

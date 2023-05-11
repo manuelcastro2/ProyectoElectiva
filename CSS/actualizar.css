@@ -29,7 +29,7 @@ header {
     padding: 20px 0;
 }
 
-header>a {
+header>span {
     background-image: url(../IMG/logo-removebg-preview2.png);
     background-repeat: no-repeat;
     background-size: cover;

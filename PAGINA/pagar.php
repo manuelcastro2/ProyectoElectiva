@@ -5,7 +5,7 @@
     <title></title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/style.css" rel="../CSS/pagar.css">
+    <link href="../CSS/pagar.css" rel="stylesheet">
 </head>
 
 <body>
@@ -58,48 +58,54 @@
             </div>
         </header>
         <main>
+            <div class="volver">
+                <a href="carrito.php">volver</a>
+            </div>
             <form method="post">
+                <div class="caja-datos">
+                    <p class="direccion">
+                        Direccion de entrega
+                    </p>
+                    <p>
+                        <span class="nombreytelefono">
+                            <?php echo $usuario["usuario"], " ", $usuario["telefono"] ?>
+                        </span>
+                        <?php echo " ", $usuario["direccion"]; ?>
+                    </p>
+                </div>
                 <?php
                 $tot = 0;
                 $id_pagar;
-                if (isset($_POST["btnpagar"])) {
-                    ?>
-                    <div>
-                        <p>
-                            Direccion de entrega
+                if (!isset($_POST["enviarpago"])) {
+                    if (isset($_POST["btnpagar"])) {
+                        ?>
+                        <p class="select">
+                            productos seleccionados
                         </p>
-                        <p>
-                            <?php
-                            echo $usuario["usuario"], " ", $usuario["telefono"], " ", $usuario["direccion"];
-                            ?>
-                        </p>
-                    </div>
-                    <p>
-                        productos seleccionados
-                    </p>
-                    <?php
-                    while ($fila = mysqli_fetch_array($resultado1)) {
-                        if (isset($_POST[$fila["id_produ"]])) {
-                            switch ($fila["id_produ"]) {
-                                case $_POST[$fila["id_produ"]]:
-                                    ?>
-                                    <input type="hidden" name="<?php echo $fila["id_produ"]; ?>" value="<?php echo $fila["id_produ"]; ?>">
-                                    <div class="card">
-                                        <p>
-                                            <?php
-                                            echo $fila["tipo_produc"];
-                                            ?>
-                                        </p>
-                                        <span>precio unitario</span>
-                                        <span>cantidad</span>
-                                        <span>subtotal del articulo</span>
-                                        <div>
-                                            <p class="produ">
-                                                <?php
-                                                echo $fila["Nombre_prod"];
-                                                ?>
-                                            </p>
+                        <?php
+                        while ($fila = mysqli_fetch_array($resultado1)) {
+                            if (isset($_POST[$fila["id_produ"]])) {
+                                switch ($fila["id_produ"]) {
+                                    case $_POST[$fila["id_produ"]]:
+                                        ?>
+                                        <input type="hidden" name="<?php echo $fila["id_produ"]; ?>" value="<?php echo $fila["id_produ"]; ?>">
+                                        <div class="card">
+                                            <div class="title-card">
+                                                <p class="title-single">
+                                                    <?php
+                                                    echo $fila["tipo_produc"];
+                                                    ?>
+                                                </p>
+                                                <span class="title-single">precio unitarios</span>
+                                                <span class="title-single">cantidad</span>
+                                                <span class="title-single">subtotal del articulo</span>
+                                            </div>
                                             <div class="conte">
+                                                <p class="produ">
+                                                    <?php
+                                                    echo $fila["Nombre_prod"];
+                                                    ?>
+                                                </p>
                                                 <p class=produ2>
                                                     <?php
                                                     $numeroFormateado = number_format($fila["precio"], 0);
@@ -121,72 +127,73 @@
                                                 </p>
                                             </div>
                                         </div>
-                                    </div>
-                                <?php
+                                    <?php
+                                }
                             }
                         }
                     }
+                    ?>
+                    <div class="metodos-pago">
+                        <p>metodos de pago</p>
+                        <div class="radio-input">
+                            <label for=""><input name="radio" type="radio" class="input" checked=""
+                                    value="Nequi">Nequi</label>
+                            <label for=""><input name="radio" type="radio" class="input" value="Daviplata">Daviplata</label>
+                            <label for=""><input name="radio" type="radio" class="input"
+                                    Value="Bancolombia">Bancolombia</label>
+                        </div>
+                    </div>
+                    <div class="valores">
+                        <?php
+                        $envio = 8000;
+                        $totalpagar = $tot + $envio;
+                        $numeroFormateado = number_format($tot, 0);
+                        $numeroFormateado2 = number_format($envio, 0);
+                        $numeroFormateado3 = number_format($totalpagar, 0);
+                        ?>
+                        <p>
+                            <span class="negrita-valores">
+                                <?php
+                                echo "SUBTOTAL: ", "$ ";
+                                ?>
+                            </span>
+                            <span>
+                                <?php
+                                echo strval($numeroFormateado);
+                                ?>
+                            </span>
+                        </p>
+                        <p>
+                            <span class="negrita-valores">
+                                <?php
+                                echo "TOTAL ENVIO: $";
+                                ?>
+                            </span>
+                            <span>
+                                <?php
+                                echo strval($numeroFormateado2);
+                                ?>
+                            </span>
+                        </p>
+                        <p>
+                            <span class="negrita-valores">
+                                <?php
+                                echo "TOTAL: $";
+                                ?>
+                            </span>
+                            <span>
+                                <?php
+                                echo strval($numeroFormateado3);
+                                ?>
+                            </span>
+                        </p>
+                    </div>
+                    <div>
+                        <button name="enviarpago" id="enviarpago" type="submit">PAGAR</button>
+                    </div>
+                    <?php
                 }
                 ?>
-                <div>
-                    <p>metodos de pago</p>
-                    <div>
-                        <label for="nequi"><input type="radio" id="nequi" name="pago" value="nequi"
-                                checked>Nequi</label>
-                        <label for="daviplata"><input type="radio" id="daviplata" name="pago"
-                                value="daviplata">Daviplata</label>
-                        <label for="bancolombia"><input type="radio" id="bancolombia" name="pago"
-                                value="bancolombia">Bancolombia</label>
-                    </div>
-                </div>
-                <div>
-                    <?php
-                    $envio = 8000;
-                    $totalpagar = $tot + $envio;
-                    $numeroFormateado = number_format($tot, 0);
-                    $numeroFormateado2 = number_format($envio, 0);
-                    $numeroFormateado3 = number_format($totalpagar, 0);
-                    ?>
-                    <p>
-                        <span>
-                            <?php
-                            echo "SUBTOTAL: ", "$ ";
-                            ?>
-                        </span>
-                        <span>
-                            <?php
-                            echo strval($numeroFormateado);
-                            ?>
-                        </span>
-                    </p>
-                    <p>
-                        <span>
-                            <?php
-                            echo "TOTAL ENVIO: $";
-                            ?>
-                        </span>
-                        <span>
-                            <?php
-                            echo strval($numeroFormateado2);
-                            ?>
-                        </span>
-                    </p>
-                    <p>
-                        <span>
-                            <?php
-                            echo "TOTAL: $";
-                            ?>
-                        </span>
-                        <span>
-                            <?php
-                            echo strval($numeroFormateado3);
-                            ?>
-                        </span>
-                    </p>
-                </div>
-                <div>
-                    <button name="enviarpago" id="enviarpago" type="submit">PAGAR</button>
-                </div>
             </form>
             <?php
             if (isset($_POST["enviarpago"])) {
@@ -202,8 +209,10 @@
                                     <div class="caja-mensaje">
                                         <div class="mensaje">
                                             <p>SE REALIZO EL PEDIDO CORRECTAMENTE</p>
-                                            <a href="carrito.php">Cerrar</a>
+                                           <div>
+                                           <a href="carrito.php">Cerrar</a>
                                             <a href="#">factura</a>
+                                           </div>
                                         </div>
                                     </div>
                                     <?php

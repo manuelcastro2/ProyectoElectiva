@@ -6,15 +6,15 @@
 
 body {
     font-family: Arial, Helvetica, sans-serif;
+    background-color: #e3e3e3;
 }
 
 .caja-todo {
-    background-color: #e3e3e3;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    height: 150%;
+    height: 100%;
 }
 
 header {
@@ -37,7 +37,7 @@ header {
     align-items: center;
 }
 
-header>span {
+.encabezado>span {
     background-image: url(../IMG/logo-removebg-preview2.png);
     background-repeat: no-repeat;
     background-size: cover;
@@ -120,23 +120,40 @@ main {
 }
 
 .card {
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: white;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
     min-width: 100%;
-    min-height: 230px;
+    min-height: 200px;
     position: relative;
     margin-bottom: 20px;
 }
 
-.card>p {
-    border-bottom: 1.2px solid #e3e3e3;
-    width: 95%;
-    padding: 10px 0;
-    font-weight: 600;
+.title-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    left: 30px;
 }
+
+.title-single {
+    border-bottom: 1.2px solid #d7d6d6;
+    width: 24%;
+    font-weight: 600;
+    text-align: center;
+    position: relative;
+    left: -30px;
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    height: 35px;
+}
+
 
 .card>div {
     width: 100%;
@@ -145,6 +162,7 @@ main {
 }
 
 .card div>.produ2 {
+    top: 35px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -163,14 +181,14 @@ main {
 }
 
 .produ {
+    top: 35px;
     display: flex;
-    justify-content: left;
     align-items: center;
     position: relative;
-    left: 35px;
-    text-align: left;
-    width: 40%;
-    gap: 50px;
+    left: 50px;
+    text-align: center;
+    width: 35%;
+    padding: 0 30px;
 }
 
 .mensaje {
@@ -182,6 +200,16 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    text-align: center;
+}
+
+.mensaje div{
+    width: 100%;
+    justify-content: center;
+    gap: 40px;
+    display: flex;
+    position: relative;
+    top: 20px;
 }
 
 .mensaje p {
@@ -213,4 +241,174 @@ main {
     z-index: 1;
     position: absolute;
     background: rgb(0, 0, 0, 0.5);
+}
+
+.caja-datos {
+    padding: 30px;
+    width: 1100px;
+    height: 50px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    border-top: 8px solid #001233;
+    box-shadow: 0px 0px 10px rgb(0, 0, 0, 0.5);
+    background: white;
+}
+
+.direccion {
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.caja-datos p {
+    text-transform: capitalize;
+}
+
+.nombreytelefono {
+    font-weight: 700;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.volver {
+    width: 90%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+}
+
+.volver a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: 800;
+    font-size: 20px;
+    text-transform: uppercase;
+    transition: all .4s ease-in-out;
+}
+
+.volver a:hover {
+    color: #001233;
+}
+
+.select {
+    margin: 20px 0;
+    background: white;
+    width: 20%;
+    position: relative;
+    padding: 20px 30px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.metodos-pago {
+    width: 40%;
+    height: 250px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, .5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+    margin-bottom: 20px;
+}
+
+.metodos-pago p {
+    position: relative;
+    font-size: 40px;
+    font-weight: 700;
+    text-transform: uppercase;
+    top: 30px;
+}
+
+.input {
+    -webkit-appearance: none;
+    display: relative;
+    margin: 10px;
+    width: 24px;
+    height: 24px;
+    border-radius: 12px;
+    cursor: pointer;
+    vertical-align: middle;
+    box-shadow: hsla(0, 0%, 100%, .15) 0 1px 1px, inset hsla(0, 0%, 0%, .5) 0 0 0 1px;
+    background-color: hsla(0, 0%, 0%, .2);
+    background-image: -webkit-radial-gradient(hsla(200, 100%, 90%, 1) 0%, hsla(200, 100%, 70%, 1) 15%, hsla(200, 100%, 60%, .3) 28%, hsla(200, 100%, 30%, 0) 70%);
+    background-repeat: no-repeat;
+    -webkit-transition: background-position .15s cubic-bezier(.8, 0, 1, 1),
+        -webkit-transform .25s cubic-bezier(.8, 0, 1, 1);
+    outline: none;
+}
+
+.input:checked {
+    -webkit-transition: background-position .2s .15s cubic-bezier(0, 0, .2, 1),
+        -webkit-transform .25s cubic-bezier(0, 0, .2, 1);
+}
+
+.input:active {
+    -webkit-transform: scale(1.5);
+    -webkit-transition: -webkit-transform .1s cubic-bezier(0, 0, .2, 1);
+}
+
+.input,
+.input:active {
+    background-position: 0 24px;
+}
+
+.input:checked {
+    background-position: 0 0;
+}
+
+.input:checked~.input,
+.input:checked~.input:active {
+    background-position: 0 -24px;
+}
+
+.radio-input{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 40px;
+    width: 90%;
+}
+
+.valores{
+    width: 40%;
+    height: 130px;
+    background-color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, .5);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 0 20px;
+    margin-bottom: 20px;
+}
+
+.negrita-valores{
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+#enviarpago{
+    border: 2px solid #001233;
+    margin-bottom: 20px;
+    padding: 10px 60px;
+    position: relative;
+    font-weight: 700;
+    font-size: 20px;
+    color: #001233;
+    transition: all .4s ease-in-out;
+}
+
+#enviarpago:hover{
+    color: white;
+    background: #001233;
+}
+
+#enviarpago:focus{
+    color: white;
+    background: #007bff;
 }

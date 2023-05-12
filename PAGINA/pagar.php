@@ -58,71 +58,73 @@
             </div>
         </header>
         <main>
-            <?php
-            if (isset($_POST["btnpagar"])) {
-                ?>
-                <div>
-                    <p>
-                        Direccion de entrega
-                    </p>
-                    <p>
-                        <?php
-                        echo $usuario["usuario"], " ", $usuario["telefono"], " ", $usuario["direccion"];
-                        ?>
-                    </p>
-                </div>
-                <p>
-                    productos seleccionados
-                </p>
+            <form method="post">
                 <?php
                 $tot = 0;
-                while ($fila = mysqli_fetch_array($resultado1)) {
-                    if (isset($_POST[$fila["id_produ"]])) {
-                        switch ($fila["id_produ"]) {
-                            case $_POST[$fila["id_produ"]]:
-                                ?>
-                                <div class="card">
-                                    <p>
-                                        <?php
-                                        echo $fila["tipo_produc"];
-                                        ?>
-                                    </p>
-                                    <div>
-                                        <p class="produ">
+                $id_pagar;
+                if (isset($_POST["btnpagar"])) {
+                    ?>
+                    <div>
+                        <p>
+                            Direccion de entrega
+                        </p>
+                        <p>
+                            <?php
+                            echo $usuario["usuario"], " ", $usuario["telefono"], " ", $usuario["direccion"];
+                            ?>
+                        </p>
+                    </div>
+                    <p>
+                        productos seleccionados
+                    </p>
+                    <?php
+                    while ($fila = mysqli_fetch_array($resultado1)) {
+                        if (isset($_POST[$fila["id_produ"]])) {
+                            switch ($fila["id_produ"]) {
+                                case $_POST[$fila["id_produ"]]:
+                                    ?>
+                                    <input type="hidden" name="<?php echo $fila["id_produ"]; ?>" value="<?php echo $fila["id_produ"]; ?>">
+                                    <div class="card">
+                                        <p>
                                             <?php
-                                            echo $fila["Nombre_prod"];
+                                            echo $fila["tipo_produc"];
                                             ?>
                                         </p>
-                                        <div class="conte">
-                                            <p class=produ2>
+                                        <div>
+                                            <p class="produ">
                                                 <?php
-                                                $numeroFormateado = number_format($fila["precio"], 0);
-                                                echo "$ ", strval($numeroFormateado);
+                                                echo $fila["Nombre_prod"];
                                                 ?>
                                             </p>
-                                            <p class=produ2>
-                                                <?php
-                                                echo $fila["canti"];
-                                                ?>
-                                            </p>
-                                            <p class=produ2>
-                                                <?php
-                                                $total = $fila["canti"] * $fila["precio"];
-                                                $tot = $tot + $total;
-                                                $numeroFormateado = number_format($total, 0);
-                                                echo "$ ", strval($numeroFormateado);
-                                                ?>
-                                            </p>
+                                            <div class="conte">
+                                                <p class=produ2>
+                                                    <?php
+                                                    $numeroFormateado = number_format($fila["precio"], 0);
+                                                    echo "$ ", strval($numeroFormateado);
+                                                    ?>
+                                                </p>
+                                                <p class=produ2>
+                                                    <?php
+                                                    echo $fila["canti"];
+                                                    ?>
+                                                </p>
+                                                <p class=produ2>
+                                                    <?php
+                                                    $total = $fila["canti"] * $fila["precio"];
+                                                    $tot = $tot + $total;
+                                                    $numeroFormateado = number_format($total, 0);
+                                                    echo "$ ", strval($numeroFormateado);
+                                                    ?>
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            <?php
+                                <?php
+                            }
                         }
                     }
                 }
-            }
-            ?>
-            <form method="post">
+                ?>
                 <div>
                     <p>metodos de pago</p>
                     <div>
@@ -188,23 +190,27 @@
                 while ($fila = mysqli_fetch_array($resultado1)) {
                     if (isset($_POST[$fila["id_produ"]])) {
                         switch ($fila["id_produ"]) {
-                            case $_POST[$fila["id_produ"]]:
-                                $au = $_POST[$fila["id_produ"]];
+                            case $fila["id_produ"]:
+                                $au = $fila["id_produ"];
                                 $consulta = "DELETE from compra where id_usuario='$id_usuario' and id_produ='$au'";
                                 $compra = mysqli_query($conn, $consulta);
                                 if (mysqli_affected_rows($conn) > 0) {
+                                    ?>
+                                    <div class="caja-mensaje">
+                                        <div class="mensaje">
+                                            <p>SE REALIZO EL PEDIDO CORRECTAMENTE</p>
+                                            <a href="carrito.php">Cerrar</a>
+                                            <a href="#">factura</a>
+                                        </div>
+                                    </div>
+                                    <?php
+                                } else {
+                                    echo "<script>alert('error')</script>";
                                 }
+                                break;
                         }
                     }
                 }
-                ?>
-                <div class="caja-mensaje">
-                    <div class="mensaje">
-                        <p>SE REALIZO EL PEDIDO CORRECTAMENTE</p>
-                        <a href="carrito.php">Cerrar</a>
-                    </div>
-                </div>
-                <?php
             }
             ?>
         </main>

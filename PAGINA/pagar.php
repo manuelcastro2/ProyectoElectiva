@@ -90,6 +90,9 @@
                                             echo $fila["tipo_produc"];
                                             ?>
                                         </p>
+                                        <span>precio unitario</span>
+                                        <span>cantidad</span>
+                                        <span>subtotal del articulo</span>
                                         <div>
                                             <p class="produ">
                                                 <?php

@@ -197,6 +197,48 @@
             </form>
             <?php
             if (isset($_POST["enviarpago"])) {
+                ?>
+                <div class="caja-mensaje">
+                    <div class="mensaje">
+                        <p>SE REALIZO EL PEDIDO CORRECTAMENTE</p>
+                        <div>
+                            <form method="post">
+                                <?php
+                                while ($fila = mysqli_fetch_array($resultado1)) {
+                                    if (isset($_POST[$fila["id_produ"]])) {
+                                        switch ($fila["id_produ"]) {
+                                            case $fila["id_produ"]:
+                                                ?>
+                                                <input type="hidden" name="<?php echo $fila["id_produ"]; ?>"
+                                                    value="<?php echo $fila["id_produ"]; ?>">
+                                            <?php
+                                        }
+                                    }
+                                }
+                                ?>
+                                <button type="submit" name="inter">Cerrar</button>
+                            </form>
+                            <form method="post" action="factura.php">
+                                <?php
+                                while ($fila = mysqli_fetch_array($resultado1)) {
+                                    if (isset($_POST[$fila["id_produ"]])) {
+                                        switch ($fila["id_produ"]) {
+                                            case $fila["id_produ"]:
+                                                ?>
+                                                <input type="hidden" name="<?php echo $fila["id_produ"]; ?>" value="<?php echo $fila["id_produ"]; ?>">
+                                            <?php
+                                        }
+                                    }
+                                }
+                                ?>
+                                <button type="submit" name="factura">FACTURA</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <?php
+            }
+            if (isset($_POST["inter"])) {
                 while ($fila = mysqli_fetch_array($resultado1)) {
                     if (isset($_POST[$fila["id_produ"]])) {
                         switch ($fila["id_produ"]) {
@@ -205,21 +247,10 @@
                                 $consulta = "DELETE from compra where id_usuario='$id_usuario' and id_produ='$au'";
                                 $compra = mysqli_query($conn, $consulta);
                                 if (mysqli_affected_rows($conn) > 0) {
-                                    ?>
-                                    <div class="caja-mensaje">
-                                        <div class="mensaje">
-                                            <p>SE REALIZO EL PEDIDO CORRECTAMENTE</p>
-                                           <div>
-                                           <a href="carrito.php">Cerrar</a>
-                                            <a href="#">factura</a>
-                                           </div>
-                                        </div>
-                                    </div>
-                                    <?php
-                                } else {
-                                    echo "<script>alert('error')</script>";
+                                    header( 'location: carrito.php' );
+                                }else{
+                                    echo'<script>alert("error")</script>';
                                 }
-                                break;
                         }
                     }
                 }

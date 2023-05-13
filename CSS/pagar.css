@@ -218,7 +218,7 @@ main {
     text-transform: uppercase;
 }
 
-.mensaje a {
+.mensaje a,button {
     text-decoration: none;
     color: #007bff;
     padding: 5px 10px;
@@ -227,7 +227,7 @@ main {
     background: white;
 }
 
-.mensaje a:focus {
+.mensaje a,button:focus {
     color: #f45050;
     border-color: #f45050;
 }

@@ -202,6 +202,32 @@
                     <div class="mensaje">
                         <p>SE REALIZO EL PEDIDO CORRECTAMENTE</p>
                         <div>
+                            <form method="post" action="factura.php">
+                                <?php
+                                $metodo=$_POST["radio"];
+                                ?>
+                                <input type="hidden" name="radio" value="<?php echo $metodo; ?>">
+                                <?php
+                                $consulta2 = "SELECT * FROM compra,productos 
+                                where productos.id_producto=compra.id_produ 
+                                and id_usuario='$id_usuario'";
+                                $resultado2 = mysqli_query($conn, $consulta2);
+                                while ($filo = mysqli_fetch_array($resultado2)) {
+                                    if (isset($_POST[$filo["id_produ"]])) {
+                                        switch ($filo["id_produ"]) {
+                                            case $filo["id_produ"]:
+                                                ?>
+                                                <input type="text" name="<?php echo $filo["id_produ"]; ?>"
+                                                    value="<?php echo $filo["id_produ"]; ?>" hidden>
+                                            <?php
+                                        }
+                                    }
+                                }
+                                ?>
+                                <button type="submit" name="factura">FACTURA</button>
+                            </form>
+                        </div>
+                        <div>
                             <form method="post">
                                 <?php
                                 while ($fila = mysqli_fetch_array($resultado1)) {
@@ -209,29 +235,14 @@
                                         switch ($fila["id_produ"]) {
                                             case $fila["id_produ"]:
                                                 ?>
-                                                <input type="hidden" name="<?php echo $fila["id_produ"]; ?>"
-                                                    value="<?php echo $fila["id_produ"]; ?>">
+                                                <input type="text" name="<?php echo $fila["id_produ"]; ?>"
+                                                    value="<?php echo $fila["id_produ"]; ?>" hidden>
                                             <?php
                                         }
                                     }
                                 }
                                 ?>
                                 <button type="submit" name="inter">Cerrar</button>
-                            </form>
-                            <form method="post" action="factura.php">
-                                <?php
-                                while ($fila = mysqli_fetch_array($resultado1)) {
-                                    if (isset($_POST[$fila["id_produ"]])) {
-                                        switch ($fila["id_produ"]) {
-                                            case $fila["id_produ"]:
-                                                ?>
-                                                <input type="hidden" name="<?php echo $fila["id_produ"]; ?>" value="<?php echo $fila["id_produ"]; ?>">
-                                            <?php
-                                        }
-                                    }
-                                }
-                                ?>
-                                <button type="submit" name="factura">FACTURA</button>
                             </form>
                         </div>
                     </div>
@@ -247,9 +258,9 @@
                                 $consulta = "DELETE from compra where id_usuario='$id_usuario' and id_produ='$au'";
                                 $compra = mysqli_query($conn, $consulta);
                                 if (mysqli_affected_rows($conn) > 0) {
-                                    header( 'location: carrito.php' );
-                                }else{
-                                    echo'<script>alert("error")</script>';
+                                    header('location: carrito.php');
+                                } else {
+                                    echo '<script>alert("error")</script>';
                                 }
                         }
                     }

@@ -204,7 +204,7 @@ main {
 }
 
 .mensaje div{
-    width: 100%;
+    width: 50%;
     justify-content: center;
     gap: 40px;
     display: flex;

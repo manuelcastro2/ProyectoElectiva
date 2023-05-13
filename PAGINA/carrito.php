@@ -15,7 +15,7 @@
         <header>
             <div class="encabezado">
                 <a href="productos.php">
-                <span></span>
+                    <span></span>
                 </a>
                 <nav>
                     <div class="footer">
@@ -72,7 +72,7 @@
                         <p>Acciones</p>
                     </div>
                 </section>
-                <form method="post" action="pagar.php">
+                <form method="post">
                     <?php
                     if (isset($_SESSION['id_usuario'])) {
                         $user = $usuario["correo"];
@@ -81,10 +81,7 @@
                     where productos.id_producto=compra.id_produ
                     and id_usuario='$user'";
                         $resultado = mysqli_query($conn, $consulta);
-
-
                         while ($fila = mysqli_fetch_array($resultado)) {
-
                             ?>
                             <div class="card">
                                 <p>
@@ -94,11 +91,17 @@
                                 </p>
                                 <div>
                                     <p class="produ">
-                                        <input type="checkbox" name="<?php echo $fila["id_producto"]; ?>"
-                                            value="<?php echo $fila["id_producto"]; ?>">
-                                        <?php
-                                        echo $fila["Nombre_prod"];
-                                        ?>
+                                        <label class="checkbox-btn">
+                                            <label for="checkbox"></label>
+                                            <input type="checkbox" class="vali" name="<?php echo $fila["id_producto"]; ?>"
+                                                value="<?php echo $fila["id_producto"]; ?>">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <span>
+                                            <?php
+                                            echo $fila["Nombre_prod"];
+                                            ?>
+                                        </span>
                                     </p>
                                     <div class="conte">
                                         <p class=produ2>
@@ -132,7 +135,7 @@
                         }
                         ?>
                         <div class="caja-pagar">
-                            <button type="submit" name="btnpagar" id="btnpagar">CONTINUAR</button>
+                            <button type="submit" name="btnpagar" id="btnpagar">SELECCIONAR Y PAGAR</button>
                         </div>
                         <?php
                     } else {
@@ -142,7 +145,6 @@
                     }
                     ?>
                 </form>
-
             </div>
             <div class="pie-pagina">
                 <div class="caja-enlace">
@@ -266,6 +268,59 @@
             } else {
                 echo '<script>alert("error")</script>';
             }
+        }
+        ?>
+        <?php
+        if (isset($_POST["btnpagar"])) {
+            ?>
+            <?php
+            $cont = 0;
+            $user = $usuario["correo"];
+            $consulta = "SELECT DISTINCT *
+                            FROM productos,compra
+                            where productos.id_producto=compra.id_produ
+                            and id_usuario='$user'";
+            $resultado = mysqli_query($conn, $consulta);
+            ?>
+            <div class="caja-mensaje">
+                <div class="mensaje">
+                    <form class="cartel" method="post" action="pagar.php">
+
+                        <?php
+                        while ($fila = mysqli_fetch_array($resultado)) {
+                            if (isset($_POST[$fila["id_produ"]])) {
+                                $cont++;
+                                ?>
+                                <input type="hidden" name="<?php echo $fila["id_producto"]; ?>"
+                                    value="<?php echo $fila["id_producto"]; ?>">
+                                <?php
+                            }
+                        }
+                        if ($cont > 0) {
+                            ?>
+                            <p>
+                                <?php
+                                echo "SELECCIONO ", $cont, " PRODUCTOS";
+                                ?>
+                            </p>
+                            <br>
+                            <button name="pagar" type="submit">CONTINUAR</button>
+                            <?php
+                        } else {
+                            ?>
+                            <p>
+                                <?php
+                                echo "NO SELECCIONO PRODUCTOS";
+                                ?>
+                            </p>
+                            <br><a href="carrito.php">CERRAR</a>
+                            <?php
+                        }
+                        ?>
+                    </form>
+                </div>
+            </div>
+            <?php
         }
         ?>
     </div>

@@ -77,7 +77,7 @@
                 $tot = 0;
                 $id_pagar;
                 if (!isset($_POST["enviarpago"])) {
-                    if (isset($_POST["btnpagar"])) {
+                    if (isset($_POST["pagar"])) {
                         ?>
                         <p class="select">
                             productos seleccionados

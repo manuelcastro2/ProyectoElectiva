@@ -6,9 +6,9 @@
 * Date:    2022-11-10                                                          *
 * Author:  Olivier PLATHEY                                                     *
 *******************************************************************************/
-
 class FPDF
 {
+	
 const VERSION = '1.85';
 protected $page;               // current page number
 protected $n;                  // current object number

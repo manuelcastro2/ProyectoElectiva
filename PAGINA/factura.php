@@ -1,8 +1,6 @@
 <?php
 require('../pdf/fpdf.php');
-include('../pdf/fpdf.php');
 include('../CONEXION/conexion.php');
-require('../CONEXION/conexion.php');
 session_start();
 if (isset($_SESSION['id_usuario'])) {
     $id_usuario = $_SESSION["id_usuario"];
@@ -15,7 +13,7 @@ if (isset($_SESSION['id_usuario'])) {
     }
 }
 
-class PDF extends FPDF
+class PDFH extends FPDF
 {
 
     function header()
@@ -24,7 +22,7 @@ class PDF extends FPDF
         $this->Image('../IMG/logo-removebg-preview2.png', 0, -10, 220);
 
         $this->Ln(10);
-        $this->SetFont('Arial', '8', 10);
+        $this->SetFont('Arial', '', 10);
         $this->Cell(-200);
     }
 
@@ -41,7 +39,7 @@ class PDF extends FPDF
         $this->Ln();
     }
 }
-$pdf = new PDF();
+$pdf = new PDFH();
 $pdf->AliasNbPages();
 $pdf->AddPage();
 $pdf->SetFont('Arial', '', 10);
@@ -56,14 +54,14 @@ $pdf->Cell(59, 9, 'Cantidad', 0, 0, 'C', 1);
 $pdf->Cell(59, 9, 'Precio Unitario', 0, 0, 'C', 1);
 $pdf->Cell(59, 9, 'Total', 0, 0, 'C', 1);
 
-$consulta = "SELECT * compra where productos.id_producto=compra.id_produ 
+$consulta = "SELECT * FROM compra,productos WHERE productos.id_producto=compra.id_produ 
 and id_usuario='$id_usuario'";
 $resultado = mysqli_query($conn, $consulta);
 
 $pdf->SetTextColor(0, 0, 0);
 $pdf->SetFillColor(240, 245, 255);
 
-while ($fila = mysqli_fetch_array($resultado1)) {
+while ($fila = mysqli_fetch_array($resultado)) {
     if (isset($_POST[$fila["id_produ"]])) {
         $pdf->SetX(45);
         $pdf->Cell(59, 9, $fila['tipo_produc'], 0, 0, 'C', 1);
@@ -71,8 +69,6 @@ while ($fila = mysqli_fetch_array($resultado1)) {
         $pdf->Cell(59, 9, $fila['canti'], 0, 0, 'C', 1);
         $pdf->Cell(59, 9, $fila['precio'], 0, 0, 'C', 1);
         $pdf->Cell(59, 9, $fila['precio'], 0, 0, 'C', 1);
-
-        echo $fila["id_produ"];
     }
 }
 

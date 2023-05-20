@@ -87,7 +87,7 @@
                 ?>
                 <div class="caja-mensaje">
                     <div class="mensaje">
-                        <p>la clave debe tener mas 6 caracteres</p>
+                        <p>la clave debe tener mas de 6 caracteres</p>
                         <a href="registrar.php">Cerrar</a>
                     </div>
                 </div>

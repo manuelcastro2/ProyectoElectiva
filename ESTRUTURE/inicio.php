@@ -1,26 +1,3 @@
-<?php
-session_start();
-include("../CONEXION/conexion.php");
-
-if (isset($_POST["btniniciar"])) {
-    $email = mysqli_real_escape_string($conn, $_POST["correo"]);
-    $password = mysqli_real_escape_string($conn, $_POST["password"]);
-
-    $consulta = "SELECT * FROM clientes WHERE correo='$email' AND password='$password'";
-    $resultado = mysqli_query($conn, $consulta);
-
-    if (mysqli_num_rows($resultado) > 0) {
-        $usuario = mysqli_fetch_assoc($resultado);
-        $_SESSION["id_usuario"] = $usuario["correo"];
-        $_SESSION["nombre_usuario"] = $usuario["usuario"];
-        header("Location: ../index.php"); // redireccionar a la página principal
-        exit();
-    } else {
-        $mensaje = "Correo o contraseña incorrectos";
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -34,16 +11,42 @@ if (isset($_POST["btniniciar"])) {
 
 <body>
     <div class="caja-volver">
-    <form action="../index.php" method="post">
-        <button type="submit">volver</button>
-    </form>
+        <form action="../index.php" method="post">
+            <button type="submit">volver</button>
+        </form>
     </div>
     <div class="caja-todo">
+        <?php
+        session_start();
+        include("../CONEXION/conexion.php");
+
+        if (isset($_POST["btniniciar"])) {
+            $email = mysqli_real_escape_string($conn, $_POST["correo"]);
+            $password = mysqli_real_escape_string($conn, $_POST["password"]);
+
+            $consulta = "SELECT * FROM clientes WHERE correo='$email' AND password='$password'";
+            $resultado = mysqli_query($conn, $consulta);
+
+            if (mysqli_num_rows($resultado) > 0) {
+                $usuario = mysqli_fetch_assoc($resultado);
+                $_SESSION["id_usuario"] = $usuario["correo"];
+                $_SESSION["nombre_usuario"] = $usuario["usuario"];
+                header("Location: ../index.php"); // redireccionar a la página principal
+                exit();
+            } else {
+                ?>
+                <div class="caja-mensaje">
+                    <div class="mensaje">
+                        <p>Correo o contraseña incorrectos</p>
+                        <a href="inicio.php">Cerrar</a>
+                    </div>
+                </div>
+                <?php
+            }
+        }
+        ?>
         <div class="caja-intermedia">
             <h1>Iniciar sesión</h1>
-            <?php if (isset($mensaje)) {
-                echo "<p>$mensaje</p>";
-            } ?>
             <form method="POST">
                 <div class="caja-contenido">
                     <div class="user-box">
@@ -58,13 +61,13 @@ if (isset($_POST["btniniciar"])) {
                 </div>
             </form>
             <form action="Registrar.php" method="post">
-            <div class="caja-register">
-            <p>¿no tienes cuenta?</p>
-            <button type="submit">
-                REGISTRAR 
-            </button>
-            </div>
-        </form>
+                <div class="caja-register">
+                    <p>¿no tienes cuenta?</p>
+                    <button type="submit">
+                        REGISTRAR
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </body>

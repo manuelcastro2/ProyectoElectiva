@@ -38,12 +38,13 @@ $fila = mysqli_fetch_assoc($resultado);
                     <label for="correo">correo</label>
                 </div>
                 <div class="user-box">
-                    <input type="text" id="direccion" name="direccion" required="" value="<?php echo $fila['direccion']; ?>">
+                    <input type="text" id="direccion" name="direccion" required=""
+                        value="<?php echo $fila['direccion']; ?>">
                     <label for="direccion">direccion</label>
                 </div>
                 <div class="user-box">
                     <input type="text" id="telefono" name="telefono" required="" maxlength="10"
-                    value="<?php echo $fila['telefono']; ?>">
+                        value="<?php echo $fila['telefono']; ?>">
                     <label for="telefono">telefono</label>
                 </div>
                 <div class="user-box">
@@ -68,21 +69,46 @@ $fila = mysqli_fetch_assoc($resultado);
             if (empty($password1) || empty($confirmacion)) {
                 $sqlgrabar = "UPDATE clientes SET  usuario = '$nombre', correo='$email', direccion='$direccion', telefono='$telefono' WHERE correo ='$email'";
                 if (mysqli_query($conn, $sqlgrabar)) {
-                    echo '<script> alert("Usuario actualizado"); window.location.href="../index.php"</script>';
+                    ?>
+                    <div class="mensaje">
+                        <p>se actualizo correctamente</p>
+                        <a href="../index.php">Cerrar</a>
+                    </div>
+                    <?php
                 } else {
-                    echo '<script>alert("Error al actualizar")</script>';
+                    ?>
+                    <div class="mensaje">
+                        <p>error al actualizar</p>
+                        <a href="register.php">Cerrar</a>
+                    </div>
+                    <?php
                 }
 
             } else {
                 if ($password1 == $confirmacion) {
                     $sqlgrabar = "UPDATE clientes SET  usuario = '$nombre', correo='$email', direccion='$direccion', telefono='$telefono',password='$password1' WHERE correo ='$email'";
                     if (mysqli_query($conn, $sqlgrabar)) {
-                        echo '<script> alert("Usuario actualizado"); window.location.href="../index.php"</script>';
+                        ?>
+                        <div class="mensaje">
+                            <p>se actualizo correctamente</p>
+                            <a href="../index.php">Cerrar</a>
+                        </div>
+                        <?php
                     } else {
-                        echo '<script>alert("Error al actualizar")</script>';
+                        ?>
+                        <div class="mensaje">
+                            <p>error al actualizar</p>
+                            <a href="register.php">Cerrar</a>
+                        </div>
+                        <?php
                     }
                 } else {
-                    echo '<script>alert("ambas contraseñas deben ser iguales")</script>';
+                    ?>
+                    <div class="mensaje">
+                        <p>las claves deben ser iguales</p>
+                        <a href="register.php">Cerrar</a>
+                    </div>
+                    <?php
                 }
             }
 

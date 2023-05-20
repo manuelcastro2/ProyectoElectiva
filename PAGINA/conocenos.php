@@ -32,12 +32,6 @@
                         if (mysqli_num_rows($resultado) == 1) {
                             $usuario = mysqli_fetch_assoc($resultado);
                         }
-
-                        if (isset($_POST["cerrar"])) {
-                            echo ' <script>alert("Cerro la sesion");</script>';
-                            session_destroy();
-                            die();
-                        }
                         ?>
                         <details class="menu">
                             <summary>
@@ -163,6 +157,20 @@
                 </div>
             </div>
         </main>
+        <?php
+        if (isset($_POST["cerrar"])) {
+            ?>
+            <div class="caja-mensaje">
+                <div class="mensaje">
+                    <p>SE CERRO CORRECTAMENTE LA SESION</p>
+                    <a href="../index.php">Cerrar</a>
+                </div>
+            </div>
+            <?php
+            session_destroy();
+            die();
+        }
+        ?>
     </div>
 
 </body>

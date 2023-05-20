@@ -638,3 +638,48 @@ textarea {
 .caja-ico a:hover {
     transform: translateY(-10px);
 }
+
+.mensaje {
+    height: 30%;
+    width: 40%;
+    background: white;
+    border-radius: 10px;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.mensaje p {
+    font-size: 25px;
+    font-weight: 500;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.mensaje a {
+    text-decoration: none;
+    color: #007bff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #007bff;
+    background: white;
+}
+
+.mensaje a:focus {
+    color: #f45050;
+    border-color: #f45050;
+}
+
+.caja-mensaje {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    position: absolute;
+    background: rgb(0, 0, 0, 0.5);
+    z-index: 19;
+}

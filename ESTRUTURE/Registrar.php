@@ -67,11 +67,66 @@
             $confirmacion = mysqli_real_escape_string($conn, $_POST["password2"]);
             if (empty($email) || empty($password1) || empty($confirmacion)) {
                 ?>
-                <script>alert("faltan campos por completar")</script>
+                <div class="caja-mensaje">
+                    <div class="mensaje">
+                        <p>faltan campos por completar</p>
+                        <a href="registrar.php">Cerrar</a>
+                    </div>
+                </div>
                 <?php
             } elseif ($password1 != $confirmacion) {
                 ?>
-                <script>alert("las claves deben ser iguales")</script>
+                <div class="caja-mensaje">
+                    <div class="mensaje">
+                        <p>las claves deben ser iguales</p>
+                        <a href="registrar.php">Cerrar</a>
+                    </div>
+                </div>
+                <?php
+            } else if (strlen($password1) < 6) {
+                ?>
+                <div class="caja-mensaje">
+                    <div class="mensaje">
+                        <p>la clave debe tener mas 6 caracteres</p>
+                        <a href="registrar.php">Cerrar</a>
+                    </div>
+                </div>
+                <?php
+            } else if (strlen($password1) > 16) {
+                ?>
+            <div class="caja-mensaje">
+                            <div class="mensaje">
+                    <p>la clave no debe tener mas 15 caracteres</p>
+                    <a href="registrar.php">Cerrar</a>
+                </div>
+            </div>
+                <?php
+            } else if (!preg_match('`[a-z]`', $password1)) {
+                ?>
+                <div class="caja-mensaje">
+                    <div class="mensaje">
+                        <p>la clave debe tener por lo menos una minuscula</p>
+                        <a href="registrar.php">Cerrar</a>
+                    </div>
+                </div>
+                <?php
+            } else if (!preg_match('`[A-Z]`', $password1)) {
+                ?>
+                <div class="caja-mensaje">
+                    <div class="mensaje">
+                        <p>la clave debe tener por lo menos una mayuscula</p>
+                        <a href="registrar.php">Cerrar</a>
+                    </div>
+                </div>
+                <?php
+            } else if (!preg_match('`[0-9]`', $password1)) {
+                ?>
+                <div class="caja-mensaje">
+                    <div class="mensaje">
+                        <p>la clave debe tener por lo menos un numero</p>
+                        <a href="registrar.php">Cerrar</a>
+                    </div>
+                </div>
                 <?php
             } else {
                 $consulta = "INSERT INTO clientes(usuario, correo, direccion, telefono, password) 
@@ -79,13 +134,21 @@
                 $resultado = mysqli_query($conn, $consulta);
                 if (mysqli_affected_rows($conn) > 0) {
                     ?>
-                    <script>alert("cuenta correctamente registrada")
-                        window.location.href = " inicio.php";
-                    </script>
+                    <div class="caja-mensaje">
+                        <div class="mensaje">
+                            <p>cuenta correctamente registrada</p>
+                            <a href="inicio.php">Cerrar</a>
+                        </div>
+                    </div>
                     <?php
                 } else {
                     ?>
-                    <script>alert("ups ERROR")</script>
+                    <div class="caja-mensaje">
+                        <div class="mensaje">
+                            <p>error</p>
+                            <a href="registrar.php">Cerrar</a>
+                        </div>
+                    </div>
                     <?php
                 }
             }

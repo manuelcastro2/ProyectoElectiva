@@ -581,6 +581,7 @@ article {
     font-size: 25px;
     font-weight: 500;
     text-transform: uppercase;
+    text-align: center;
 }
 
 .mensaje a {

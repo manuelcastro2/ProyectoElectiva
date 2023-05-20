@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <link rel="stylesheet" href="CSS/index.css">
     <title>TIENDA</title>
 </head>
@@ -31,12 +31,6 @@
 
                         if (mysqli_num_rows($resultado) == 1) {
                             $usuario = mysqli_fetch_assoc($resultado);
-                        }
-
-                        if (isset($_POST["cerrar"])) {
-                            echo ' <script>alert("Cerro la sesion");</script>';
-                            session_destroy();
-                            die();
                         }
                         ?>
                         <details class="menu">
@@ -135,13 +129,13 @@
                         <p>metodos de pago</p>
                         <div class="enlace">
                             <div class="caja-ico">
-                                <a class="nequi"href=""><i class="fa">NEQUI</i></a>
+                                <a class="nequi" href=""><i class="fa">NEQUI</i></a>
                             </div>
                             <div class="caja-ico">
-                                <a  class="daviplata"href=""><i class="fa">DAVIPLATA</i></a>
+                                <a class="daviplata" href=""><i class="fa">DAVIPLATA</i></a>
                             </div>
                             <div class="caja-ico">
-                                <a  class="banco"href=""><i class="fa">BANCOLOMBIA</i></a>
+                                <a class="banco" href=""><i class="fa">BANCOLOMBIA</i></a>
                             </div>
                         </div>
                     </div>
@@ -149,15 +143,15 @@
                         <p>siguenos</p>
                         <div class="enlace">
                             <div class="caja-iconos">
-                                <a  class="face"href=""> <i class="fa-brands fa-facebook fa"></i></a>
+                                <a class="face" href=""> <i class="fa-brands fa-facebook fa"></i></a>
                             </div>
                             <div class="caja-iconos">
                                 <a class="insta" href=""><i class="fa-brands fa-instagram fa"></i></a>
-                                
+
                             </div>
                             <div class="caja-iconos">
-                                <a  class="twi"href=""><i class="fa-brands fa-twitter fa"></i></a>
-                                
+                                <a class="twi" href=""><i class="fa-brands fa-twitter fa"></i></a>
+
                             </div>
                         </div>
                     </div>
@@ -170,6 +164,20 @@
                 </div>
             </div>
         </main>
+        <?php
+        if (isset($_POST["cerrar"])) {
+            ?>
+            <div class="caja-mensaje">
+                <div class="mensaje">
+                    <p>SE CERRO CORRECTAMENTE LA SESION</p>
+                    <a href="index.php">Cerrar</a>
+                </div>
+            </div>
+            <?php
+            session_destroy();
+            die();
+        }
+        ?>
     </div>
 
 </body>

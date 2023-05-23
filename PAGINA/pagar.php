@@ -196,7 +196,7 @@
                     <div class="mensaje">
                         <p>SE REALIZO EL PEDIDO CORRECTAMENTE</p>
                         <div>
-                            <form method="post" action="factura.php">
+                            <form method="post" action="factura.php" target="_blank">
                                 <?php
                                 $metodo=$_POST["radio"];
                                 ?>
@@ -249,6 +249,15 @@
                         switch ($fila["id_produ"]) {
                             case $fila["id_produ"]:
                                 $au = $fila["id_produ"];
+                                $canti=intval($fila['cantidad']);
+                                if($fila["canti"]==$fila["cantidad"]){
+                                    $canti=0;
+                                }else{
+                                    $canti= $canti-intval($fila["canti"]);
+                                }
+                                
+                                $update = "UPDATE productos set cantidad='$canti' where id_producto='$au'";
+                                $update2 = mysqli_query($conn, $update);
                                 $consulta = "DELETE from compra where id_usuario='$id_usuario' and id_produ='$au'";
                                 $compra = mysqli_query($conn, $consulta);
                                 if (mysqli_affected_rows($conn) > 0) {

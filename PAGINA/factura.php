@@ -12,9 +12,17 @@ if (isset($_SESSION['id_usuario'])) {
         $usuario = mysqli_fetch_assoc($resultado);
     }
 }
-$consulta = "SELECT * FROM compra,productos WHERE productos.id_producto=compra.id_produ 
+$consulta = "SELECT * FROM compra,productos WHERE productos.id_producto=compra.id_produ
 and id_usuario='$id_usuario'";
 $resultado = mysqli_query($conn, $consulta);
+while ($fila = mysqli_fetch_assoc($resultado)) {
+    if (isset($_POST[$fila["id_produ"]])) {
+        $au = $fila["id_produ"];
+        $cantidad = $fila["canti"];
+        $insert = "INSERT INTO vendidos(id_produc,id_user,cantid)VALUES('$au','$id_usuario','$cantidad')";
+        $resultado2 = mysqli_query($conn, $insert);
+    }
+}
 $date = date('d-m-y');
 
 class PDFH extends FPDF
@@ -83,9 +91,11 @@ $pdf->SetFillColor(240, 245, 255);
 $tot = 0;
 while ($fila = mysqli_fetch_assoc($resultado)) {
     if (isset($_POST[$fila["id_produ"]])) {
+        $au = $fila["id_produ"];
+        $cantidad = $fila["canti"];
+        $insert = "INSERT INTO vendidos(id_produc,id_user,cantid)VALUES('$au','$id_usuario','$cantidad')";
         $pdf->SetX(10);
         $pdf->Cell(105, 9, $fila['tipo_produc'], 0, 0, 'C', 1);
-
         $pdf->Cell(20, 9, $fila['Nombre_prod'], 0, 0, 'C', 1);
         $pdf->Cell(20, 9, $fila['canti'], 0, 0, 'C', 1);
         $numeroFormateado = number_format($fila["precio"], 0);
@@ -134,20 +144,18 @@ $pdf->Cell(40, 9, "3245231321", 0, 1, 'C', 1);
 $pdf->SetFillColor(10, 155, 255);
 $pdf->Cell(45, 9, 'CUENTA DAVIPLATA: ', 0, 0, 'C', 1);
 $pdf->SetFillColor(240, 245, 255);
-$pdf->Cell(40, 9,"3245231321", 0, 1, 'C', 1);
+$pdf->Cell(40, 9, "3245231321", 0, 1, 'C', 1);
 $pdf->SetFillColor(10, 155, 255);
 $pdf->Cell(45, 9, 'CUENTA BANCOLOMBIA: ', 0, 0, 'C', 1);
 $pdf->SetFillColor(240, 245, 255);
-$pdf->Cell(40, 9,"143245643", 0, 1, 'C', 1);
+$pdf->Cell(40, 9, "143245643", 0, 1, 'C', 1);
 $pdf->SetY(260);
 $pdf->SetX(70);
 $pdf->SetFillColor(10, 155, 255);
-$pdf->Cell(60, 15,"FIRMA ELECTROHOP", 0, 1, 'C', 1);
+$pdf->Cell(60, 15, "FIRMA ELECTROHOP", 0, 1, 'C', 1);
 
 
-
-
-$pdf->Output();
+$pdf->Output('FI',"factura.pdf");
 
 
 ?>

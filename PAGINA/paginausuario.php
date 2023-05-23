@@ -29,26 +29,26 @@ if (mysqli_num_rows($resultado) == 1) {
         <header>
             <a href="../index.php"></a>
             <form acttion="" method="post">
-                <button type="submit" name="cerrar" id="cerrar">CERRAR SESION</button>
+                <button class="button" type="submit" name="cerrar" id="cerrar">CERRAR SESION</button>
             </form>
         </header>
         <div class="contenido">
             <h1>MIS DATOS</h1>
-            <p>
-                <?php echo $usuario["usuario"]; ?>
-            </p>
-            <p>
-                <?php echo $usuario["correo"]; ?>
-            </p>
-            <p>
-                <?php echo $usuario["direccion"]; ?>
-            </p>
-            <p>
-                <?php echo"CEL:", $usuario["telefono"]; ?>
-            </p>
-            <p>
-                <?php echo"PASSWORD:", $usuario["password"]; ?>
-            </p>
+            <input disabled class="mayus"
+                value="<?php echo $usuario["usuario"]; ?>"
+            >
+            <input disabled class="mayus"
+            value="<?php echo $usuario["correo"]; ?>"
+            >
+            <input disabled class="mayus"
+            value="<?php echo $usuario["direccion"]; ?>"
+            >
+            <input disabled
+            value="<?php echo"CEL:", $usuario["telefono"]; ?>"
+            >
+            <input disabled type="password" id="password1"
+            value="<?php echo"PASSWORD:", $usuario["password"]; ?>"
+            >
             <a href="../ESTRUTURE/modificaciondatos.php?correo=<?php echo $usuario["correo"]; ?>">modificar datos</a>
         </div>
         <?php
@@ -65,7 +65,24 @@ if (mysqli_num_rows($resultado) == 1) {
             die();
         }
         ?>
+        <button type="submit" id='mostrar' class="mostrar">
     </div>
+    <script>
+        let password1 = document.querySelector('#password1')
+        let mostrar = document.querySelector('#mostrar')
+
+        mostrar.addEventListener('click', function () {
+            if (password1.type == 'password') {
+                password1.type = 'text';
+                mostrar.style.backgroundImage = "url('../IMG/1915455.png')";
+                mostrar.style.top ='-102px'; 
+            } else {
+                password1.type = 'password';
+                mostrar.style.backgroundImage = "url('../IMG/icons8-ojo-cerrado-30.png')";
+                mostrar.style.top ='-107px';   
+            }
+        })
+    </script>
 </body>
 
 </html>

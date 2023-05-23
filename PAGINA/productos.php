@@ -153,7 +153,11 @@
                             </p>
                             <p class="p2">
                                 <?php
+                               if ($produc["cantidad"]>0) {
                                 echo 'Cantidad:', $produc["cantidad"];
+                               }else{
+                                echo 'Cantidad: agotado';
+                               }
                                 ?>
                             </p>
                             <p class="p2">

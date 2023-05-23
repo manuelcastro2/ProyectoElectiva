@@ -40,7 +40,7 @@ header>span {
     top: -5px;
 }
 
-button,.button {
+.actualizar {
     background-color: transparent;
     border: none;
     position: relative;
@@ -58,7 +58,7 @@ button,.button {
     text-decoration: none;
 }
 
-button:hover,.button:hover {
+.actualizar:hover {
     background: #001233;
     color: #ffffff;
     border-radius: 5px;
@@ -115,7 +115,6 @@ h1 {
     border-bottom: 1px solid #1d1d1d;
     outline: none;
     background: transparent;
-    text-transform: uppercase;
 }
 
 .user-box label {
@@ -192,4 +191,65 @@ display: none;
 }
 #ver{
     display: block;
+}
+
+.mostrar{
+    display: none;
+    position: relative;
+    bottom: 330px;
+    right: -225px;
+    z-index: 20;
+    padding: 10px 20px;
+    background-image: url('../IMG/icons8-ojo-cerrado-30.png');
+    background-repeat: no-repeat;
+    background-size: 60%;
+    border: none;
+    background-color: transparent;
+}
+
+.mostrar2{
+    display: none;
+    position: relative;
+    bottom:300px;
+    right: -225px;
+    z-index: 20;
+    padding: 10px 20px;
+    background-image: url('../IMG/icons8-ojo-cerrado-30.png');
+    background-repeat: no-repeat;
+    background-size: 60%;
+    border: none;
+    background-color: transparent;
+}
+
+.button {
+    background-color: transparent;
+    border: none;
+    position: relative;
+    padding: 10px 20px;
+    color: #ffffff;
+    font-size: 16px;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: .5s;
+    margin-right: 30px;
+    background: #001233;
+    border-radius: 5px;
+    top: -99px;
+    left: 90px;
+    margin-bottom: 40px;
+    text-decoration: none;
+}
+
+.button:hover {
+    background: #001233;
+    color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #001233,
+        0 0 25px #001233,
+        0 0 50px #001233,
+        0 0 100px #001233;
+}
+
+.mayus{
+    text-transform: uppercase;
 }

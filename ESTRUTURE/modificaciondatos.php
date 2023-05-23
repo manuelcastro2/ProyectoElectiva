@@ -22,7 +22,7 @@ $fila = mysqli_fetch_assoc($resultado);
         <header>
             <span></span>
             <form acttion="" method="post">
-                <button type="submit" name="cerrar" id="cerrar">CERRAR SESION</button>
+                <button class="actualizar" type="submit" name="cerrar" id="cerrar">CERRAR SESION</button>
             </form>
         </header>
         <div class="contenido">
@@ -30,19 +30,19 @@ $fila = mysqli_fetch_assoc($resultado);
             <h1>ACTUALIZAR DATOS</h1>
             <form method="post">
                 <div class="user-box">
-                    <input type="text" id="usuario" name="usuario" value="<?php echo $fila['usuario']; ?>">
+                    <input class="mayus" type="text" id="usuario" name="usuario" value="<?php echo $fila['usuario']; ?>">
                     <label for="usuario">usuario</label>
                 </div>
                 <div class="user-box">
-                    <input type="email" id="correo" name="correo" value="<?php echo $fila['correo']; ?>">
+                    <input class="mayus" type="email" id="correo" name="correo" value="<?php echo $fila['correo']; ?>">
                     <label for="correo">correo</label>
                 </div>
                 <div class="user-box">
-                    <input type="text" id="direccion" name="direccion" value="<?php echo $fila['direccion']; ?>">
+                    <input class="mayus" type="text" id="direccion" name="direccion" value="<?php echo $fila['direccion']; ?>">
                     <label for="direccion">direccion</label>
                 </div>
                 <div class="user-box">
-                    <input type="text" id="telefono" name="telefono" maxlength="10"
+                    <input class="mayus" type="text" id="telefono" name="telefono" maxlength="10"
                         value="<?php echo $fila['telefono']; ?>">
                     <label for="telefono">telefono</label>
                 </div>
@@ -55,10 +55,13 @@ $fila = mysqli_fetch_assoc($resultado);
                     <label for="password2">confirmar nueva password</label>
                 </div>
 
-                <a class="button" id="ver">CAMBIAR CONTRASEÑA</a>
-                <a class="button" id="ver2">OCULTAR CONTRASEÑA</a>
-                <button type="submit" value="Actualizar" name="btnactualizar">Actualizar datos</button>
+
+                <button class="actualizar" type="submit" value="Actualizar" name="btnactualizar">Actualizar datos</button>
             </form>
+            <a class="button" id="ver">CAMBIAR CONTRASEÑA</a>
+            <a class="button" id="ver2">OCULTAR CONTRASEÑA</a>
+            <button type="submit" id='mostrar' class="mostrar">
+            <button type="submit" id='mostrar2' class="mostrar2">
         </div>
         <?php
         if (isset($_POST["btnactualizar"])) {
@@ -138,6 +141,9 @@ $fila = mysqli_fetch_assoc($resultado);
             pass2.style.display = "block"
             ver2.style.display = "block"
             ver.style.display = "none"
+            ver.style.display = "none"
+            mostrar.style.display = 'block';
+            mostrar2.style.display = 'block';
         })
 
         ver2.addEventListener("click", function () {
@@ -145,6 +151,37 @@ $fila = mysqli_fetch_assoc($resultado);
             pass2.style.display = "none"
             ver2.style.display = "none"
             ver.style.display = "block"
+            mostrar.style.display = 'none';
+            mostrar2.style.display = 'none';
+        })
+    </script>
+    <script>
+        let password1 = document.querySelector('#password1')
+        let password2 = document.querySelector('#password2')
+        let mostrar = document.querySelector('#mostrar')
+        let mostrar2 = document.querySelector('#mostrar2')
+        mostrar.addEventListener('click', function () {
+            if (password1.type == 'password') {
+                password1.type = 'text';
+                mostrar.style.backgroundImage = "url('../IMG/1915455.png')";
+                mostrar.style.bottom = '325px';
+            } else {
+                password1.type = 'password';
+                mostrar.style.backgroundImage = "url('../IMG/icons8-ojo-cerrado-30.png')";
+                mostrar.style.bottom = '330px';
+            }
+        })
+
+        mostrar2.addEventListener('click', function () {
+            if (password2.type == 'password') {
+                password2.type = 'text';
+                mostrar2.style.backgroundImage = "url('../IMG/1915455.png')";
+                mostrar2.style.bottom = '295px';
+            } else {
+                password2.type = 'password';
+                mostrar2.style.backgroundImage = "url('../IMG/icons8-ojo-cerrado-30.png')";
+                mostrar2.style.bottom = '300px';
+            }
         })
     </script>
 </body>

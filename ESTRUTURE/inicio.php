@@ -12,7 +12,7 @@
 <body>
     <div class="caja-volver">
         <form action="../index.php" method="post">
-            <button type="submit">volver</button>
+            <button type="submit" class="button">volver</button>
         </form>
     </div>
     <div class="caja-todo">
@@ -54,22 +54,39 @@
                         <label>Correo electrónico</label>
                     </div>
                     <div class="user-box">
-                        <input type="password" name="password" required="">
+                        <input type="password" id='password1'name="password" required="">
                         <label>Contraseña</label>
                     </div>
-                    <button type="submit" name="btniniciar">Iniciar sesión</button>
+                    <button class="button" type="submit" name="btniniciar">Iniciar sesión</button>
                 </div>
             </form>
             <form action="Registrar.php" method="post">
                 <div class="caja-register">
                     <p>¿no tienes cuenta?</p>
-                    <button type="submit">
+                    <button class="button" type="submit">
                         REGISTRAR
                     </button>
                 </div>
             </form>
+            <button type="submit" id='mostrar' class="mostrar">
         </div>
     </div>
+    <script>
+        let password1 = document.querySelector('#password1')
+        let mostrar = document.querySelector('#mostrar')
+
+        mostrar.addEventListener('click', function () {
+            if (password1.type == 'password') {
+                password1.type = 'text';
+                mostrar.style.backgroundImage = "url('../IMG/1915455.png')";
+                mostrar.style.top ='-90px'; 
+            } else {
+                password1.type = 'password';
+                mostrar.style.backgroundImage = "url('../IMG/icons8-ojo-cerrado-30.png')";
+                mostrar.style.top ='-95px';   
+            }
+        })
+    </script>
 </body>
 
 </html>

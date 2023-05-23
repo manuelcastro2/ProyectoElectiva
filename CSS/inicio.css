@@ -82,7 +82,7 @@ h1 {
     font-size: 12px;
 }
 
-button {
+.button {
     background-color: transparent;
     border: none;
     position: relative;
@@ -97,7 +97,7 @@ button {
     letter-spacing: 4px
 }
 
-button:hover {
+.button:hover {
     background: #0080ff;
     color: #191919;
     border-radius: 5px;
@@ -176,4 +176,17 @@ button:hover {
     z-index: 10;
     position: absolute;
     background: rgb(0, 0, 0, 0.5);
+}
+
+.mostrar{
+    position: relative;
+    top: -95px;
+    right: -100px;
+    z-index: 20;
+    padding: 10px 20px;
+    background-image: url('../IMG/icons8-ojo-cerrado-30.png');
+    background-repeat: no-repeat;
+    background-size: 60%;
+    border: none;
+    background-color: transparent;
 }

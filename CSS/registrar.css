@@ -52,7 +52,7 @@ h1 {
     position: relative;
 }
 
-.user-box input {
+.user-box .input {
     width: 100%;
     padding: 10px 0;
     font-size: 16px;
@@ -75,15 +75,15 @@ h1 {
     transition: .5s;
 }
 
-.user-box input:focus~label,
-.user-box input:valid~label {
+.user-box .input:focus~label,
+.user-box .input:enabled~label {
     top: -20px;
     left: 0;
     color: #1c1c1c;
     font-size: 12px;
 }
 
-button {
+.button {
     background-color: transparent;
     border: none;
     position: relative;
@@ -98,7 +98,7 @@ button {
     letter-spacing: 4px
 }
 
-button:hover {
+.button:hover {
     background: #0080ff;
     color: #191919;
     border-radius: 5px;
@@ -116,7 +116,8 @@ button:hover {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    left: 25%
+    left: 25%;
+    bottom:20px;
 }
 
 .caja-register p {
@@ -177,4 +178,30 @@ button:hover {
     z-index: 10;
     position: absolute;
     background: rgb(0, 0, 0, 0.5);
+}
+
+.mostrar{
+    position: relative;
+    top: -95px;
+    right: 15px;
+    z-index: 20;
+    padding: 10px 20px;
+    background-image: url('../IMG/icons8-ojo-cerrado-30.png');
+    background-repeat: no-repeat;
+    background-size: 60%;
+    border: none;
+    background-color: transparent;
+}
+
+.mostrar2{
+    position: relative;
+    top: -115px;
+    left: 200px;
+    z-index: 20;
+    padding: 10px 20px;
+    background-image: url('../IMG/icons8-ojo-cerrado-30.png');
+    background-repeat: no-repeat;
+    background-size: 60%;
+    border: none;
+    background-color: transparent;
 }

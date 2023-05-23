@@ -35,7 +35,7 @@ h1 {
     transform: translate(-50%, -50%);
     background: rgba(255, 255, 255, 0.987);
     box-sizing: border-box;
-    box-shadow: 0 15px 25px rgba(255, 255, 255,0.4);
+    box-shadow: 0 15px 25px rgba(255, 255, 255, 0.4);
     border-radius: 10px;
     width: 600px;
     height: 80%;
@@ -53,6 +53,19 @@ h1 {
 }
 
 .user-box .input {
+    text-transform: uppercase;
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #050505;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #1d1d1d;
+    outline: none;
+    background: transparent;
+}
+
+.user-box .input2 {
     width: 100%;
     padding: 10px 0;
     font-size: 16px;
@@ -75,8 +88,8 @@ h1 {
     transition: .5s;
 }
 
-.user-box .input:focus~label,
-.user-box .input:enabled~label {
+.user-box .input:focus~label, .input2:focus~label,
+.user-box .input:enabled~label, .input2:enabled~label {
     top: -20px;
     left: 0;
     color: #1c1c1c;
@@ -117,7 +130,7 @@ h1 {
     justify-content: center;
     align-items: center;
     left: 25%;
-    bottom:20px;
+    bottom: 20px;
 }
 
 .caja-register p {
@@ -180,7 +193,7 @@ h1 {
     background: rgb(0, 0, 0, 0.5);
 }
 
-.mostrar{
+.mostrar {
     position: relative;
     top: -95px;
     right: 15px;
@@ -193,7 +206,7 @@ h1 {
     background-color: transparent;
 }
 
-.mostrar2{
+.mostrar2 {
     position: relative;
     top: -115px;
     left: 200px;

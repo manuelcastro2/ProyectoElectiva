@@ -38,11 +38,11 @@
                         <label for="telefono">telefono</label>
                     </div>
                     <div class="user-box">
-                        <input class="input" type="password" id="password1" name="password1">
+                        <input class="input2" type="password" id="password1" name="password1">
                         <label for="password1">contraseña</label>
                     </div>
                     <div class="user-box">
-                        <input class="input" type="password" id="password2" name="password2">
+                        <input class="input2" type="password" id="password2" name="password2">
                         <label for="password2">repite la contraseña</label>
                     </div>
                     <button class="button" type="submit" value="Registrar" name="btnregistrar">crear cuenta</button>

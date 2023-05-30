@@ -15,14 +15,6 @@ if (isset($_SESSION['id_usuario'])) {
 $consulta = "SELECT * FROM compra,productos WHERE productos.id_producto=compra.id_produ
 and id_usuario='$id_usuario'";
 $resultado = mysqli_query($conn, $consulta);
-while ($fila = mysqli_fetch_assoc($resultado)) {
-    if (isset($_POST[$fila["id_produ"]])) {
-        $au = $fila["id_produ"];
-        $cantidad = $fila["canti"];
-        $insert = "INSERT INTO vendidos(id_produc,id_user,cantid)VALUES('$au','$id_usuario','$cantidad')";
-        $resultado2 = mysqli_query($conn, $insert);
-    }
-}
 $date = date('d-m-y');
 
 class PDFH extends FPDF
@@ -79,8 +71,8 @@ $pdf->SetY(120);
 $pdf->SetX(10);
 $pdf->SetTextColor(0.0, 0);
 $pdf->SetFillColor(10, 155, 255);
-$pdf->Cell(105, 6, 'Tipo Producto', 0, 0, 'C', 1);
-$pdf->Cell(20, 6, 'Producto', 0, 0, 'C', 1);
+$pdf->Cell(40, 6, 'Tipo Producto', 0, 0, 'C', 1);
+$pdf->Cell(80, 6, 'Producto', 0, 0, 'C', 1);
 $pdf->Cell(20, 6, 'Cantidad', 0, 0, 'C', 1);
 $pdf->Cell(25, 6, 'Precio Unitario', 0, 0, 'C', 1);
 $pdf->Cell(20, 6, 'Total', 0, 1, 'C', 1);
@@ -93,10 +85,9 @@ while ($fila = mysqli_fetch_assoc($resultado)) {
     if (isset($_POST[$fila["id_produ"]])) {
         $au = $fila["id_produ"];
         $cantidad = $fila["canti"];
-        $insert = "INSERT INTO vendidos(id_produc,id_user,cantid)VALUES('$au','$id_usuario','$cantidad')";
         $pdf->SetX(10);
-        $pdf->Cell(105, 9, $fila['tipo_produc'], 0, 0, 'C', 1);
-        $pdf->Cell(20, 9, $fila['Nombre_prod'], 0, 0, 'C', 1);
+        $pdf->Cell(40, 9, $fila['tipo_produc'], 0, 0, 'C', 1);
+        $pdf->Cell(80, 9, $fila['Nombre_prod'], 0, 0, 0, 1);
         $pdf->Cell(20, 9, $fila['canti'], 0, 0, 'C', 1);
         $numeroFormateado = number_format($fila["precio"], 0);
         $pdf->Cell(25, 9, strval($numeroFormateado), 0, 0, 'C', 1);
@@ -109,7 +100,7 @@ while ($fila = mysqli_fetch_assoc($resultado)) {
     }
 }
 $pdf->SetX(150);
-$pdf->SetY(180);
+$pdf->SetY(160);
 $pdf->SetFillColor(10, 155, 255);
 $pdf->Cell(40, 9, 'PRECIO SUBTOTAL: ', 0, 0, 'C', 1);
 $pdf->SetFillColor(240, 245, 255);
@@ -155,7 +146,7 @@ $pdf->SetFillColor(10, 155, 255);
 $pdf->Cell(60, 15, "FIRMA ELECTROHOP", 0, 1, 'C', 1);
 
 
-$pdf->Output('FI',"factura.pdf");
+$pdf->Output();
 
 
 ?>

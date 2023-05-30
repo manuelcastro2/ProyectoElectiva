@@ -331,7 +331,7 @@ svg:hover {
     top: -90px;
     left: 0;
     content: "";
-    background: linear-gradient(-45deg, #11ecfc, rgb(0, 132, 255) 40%, blue);
+    background: linear-gradient(-45deg,  #44fc11, rgb(77, 255, 0) 40%, rgb(26, 255, 0));
     transition: 0.5s;
     color: white;
     position: absolute;
@@ -524,7 +524,7 @@ article {
     left: 9px;
     width: 93%;
     height: 75%;
-    background-image: url(../IMG/foto.png);
+    background-image: url(../IMG/imagen.jpg);
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -538,7 +538,7 @@ article {
 }
 
 .p1 {
-    font-size: 20px;
+    font-size: 15px;
     font-weight: 700;
     text-align: center;
 }

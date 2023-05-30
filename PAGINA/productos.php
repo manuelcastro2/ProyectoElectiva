@@ -82,7 +82,7 @@
                         <button type="submit" name="todo">todo</button>
                     </form>
                     <?php
-                    $consulta = "SELECT * FROM productos";
+                    $consulta = "SELECT DISTINCT tipo_produc FROM productos";
                     $resultado = mysqli_query($conn, $consulta);
                     $producto = mysqli_fetch_assoc($resultado);
                     ?>
@@ -113,32 +113,42 @@
                         $verificacion = $_GET["tipo_produc"];
                         $consulta = "SELECT * FROM productos where tipo_produc='$verificacion'";
                         $resultado = mysqli_query($conn, $consulta);
-                        $produc = mysqli_fetch_assoc($resultado);
-                        ?>
-                        <div class="caja-producto">
-                            <figure class="img-producto"><!--img--></figure>
-                            <p class="p1">
-                                <?php
-                                echo $produc["Nombre_prod"];
-                                ?>
-                            </p>
-                            <p class="p2">
-                                <?php
-                                echo 'Precio:', $produc["precio"];
-                                ?>
-                            </p>
-                            <p class="p2">
-                                <?php
-                                echo 'Cantidad:', $produc["cantidad"];
-                                ?>
-                            </p>
-                            <?php
-
-                            $cantidad = (int) $produc["cantidad"];
+                        while ($produc = mysqli_fetch_array($resultado)) {
                             ?>
-                            <a href="productos.php?id_producto=<?php echo $produc["id_producto"]; ?>"> + </a>
-                        </div>
-                        <?php
+                            <div class="caja-producto">
+                                <figure class="img-producto"><!--img--></figure>
+                                <p class="p1">
+                                    <?php
+                                    echo $produc["Nombre_prod"];
+                                    ?>
+                                </p>
+                                <p class="p2">
+                                    <?php
+                                    echo 'Cantidad:', $produc["cantidad"];
+                                    ?>
+                                </p>
+                                <p class="p2">
+                                    <?php
+                                    $total = $produc["precio"];
+                                    $numeroFormateado = number_format($total, 0);
+                                    echo "Precio: $ ", strval($numeroFormateado);
+                                    ?>
+                                </p>
+                                <?php
+
+                                $cantidad = (int) $produc["cantidad"];
+                                if ($produc["cantidad"] > 0) {
+                                    ?>
+                                    <a href="productos.php?id_producto=<?php echo $produc["id_producto"]; ?>"> + </a>
+                                    <?php
+                                } else {
+                                    ?><a>AGOTADO</a>
+                                    <?php
+                                }
+                                ?>
+                            </div>
+                            <?php
+                        }
                     } else {
                         $consulta = "SELECT * FROM productos";
                         $resultado = mysqli_query($conn, $consulta);
@@ -153,22 +163,32 @@
                             </p>
                             <p class="p2">
                                 <?php
-                               if ($produc["cantidad"]>0) {
-                                echo 'Cantidad:', $produc["cantidad"];
-                               }else{
-                                echo 'Cantidad: agotado';
-                               }
+                                if ($produc["cantidad"] > 0) {
+                                    echo 'Cantidad:', $produc["cantidad"];
+                                } else {
+                                    echo 'Cantidad: agotado';
+                                }
                                 ?>
                             </p>
                             <p class="p2">
                                 <?php
-                                echo 'Precio:', $produc["precio"];
+                                $total = $produc["precio"];
+                                $numeroFormateado = number_format($total, 0);
+                                echo "Precio: $ ", strval($numeroFormateado);
                                 ?>
                             </p>
+
                             <?php
                             $cantidad = (int) $produc["cantidad"];
+                            if ($produc["cantidad"] > 0) {
+                                ?>
+                                <a href="productos.php?id_producto=<?php echo $produc["id_producto"]; ?>"> + </a>
+                                <?php
+                            } else {
+                                ?><a>AGOTADO</a>
+                                <?php
+                            }
                             ?>
-                            <a href="productos.php?id_producto=<?php echo $produc["id_producto"]; ?>"> + </a>
                         </div>
                         <?php
                         while ($produc = mysqli_fetch_array($resultado)) {
@@ -187,13 +207,22 @@
                                 </p>
                                 <p class="p2">
                                     <?php
-                                    echo 'Precio:', $produc["precio"];
+                                    $total = $produc["precio"];
+                                    $numeroFormateado = number_format($total, 0);
+                                    echo "Precio: $ ", strval($numeroFormateado);
                                     ?>
                                 </p>
                                 <?php
                                 $cantidad = (int) $produc["cantidad"];
+                                if ($produc["cantidad"] > 0) {
+                                    ?>
+                                    <a href="productos.php?id_producto=<?php echo $produc["id_producto"]; ?>"> + </a>
+                                    <?php
+                                } else {
+                                    ?><a>AGOTADO</a>
+                                    <?php
+                                }
                                 ?>
-                                <a href="productos.php?id_producto=<?php echo $produc["id_producto"]; ?>"> + </a>
                             </div>
                             <?php
                         }
@@ -221,14 +250,16 @@
                         <p>siguenos</p>
                         <div class="enlace">
                             <div class="caja-iconos">
-                                <a class="face" href=""> <i class="fa-brands fa-facebook fa"></i></a>
+                                <a class="face" href="https://www.facebook.com/profile.php?id=100092195987451&mibextid=ZbWKwL"> <i class="fa-brands fa-facebook fa"></i></a>
                             </div>
                             <div class="caja-iconos">
-                                <a class="insta" href=""><i class="fa-brands fa-instagram fa"></i></a>
+                                <a target="_blank"
+                                    class="insta" href="https://instagram.com/electro_shop3423?igshid=NGExMmI2YTkyZg=="><i class="fa-brands fa-instagram fa"></i></a>
 
                             </div>
                             <div class="caja-iconos">
-                                <a class="twi" href=""><i class="fa-brands fa-twitter fa"></i></a>
+                                <a target="_blank" href="https://wa.me/message/2C3ZVKY2CN4BE1" class="twi" href=""><i
+                                        class="fa-brands fa-whatsapp fa"></i></a>
 
                             </div>
                         </div>

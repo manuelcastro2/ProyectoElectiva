@@ -154,14 +154,14 @@
                         <p>siguenos</p>
                         <div class="enlace">
                             <div class="caja-iconos">
-                                <a class="face" href=""> <i class="fa-brands fa-facebook fa"></i></a>
+                                <a target="_blank" href="https://www.facebook.com/profile.php?id=100092195987451&mibextid=ZbWKwL" class="face" href=""> <i class="fa-brands fa-facebook fa"></i></a>
                             </div>
                             <div class="caja-iconos">
-                                <a class="insta" href=""><i class="fa-brands fa-instagram fa"></i></a>
+                                <a target="_blank" class="insta" href="https://instagram.com/electro_shop3423?igshid=NGExMmI2YTkyZg=="><i class="fa-brands fa-instagram fa"></i></a>
 
                             </div>
                             <div class="caja-iconos">
-                                <a class="twi" href=""><i class="fa-brands fa-twitter fa"></i></a>
+                                <a target="_blank" href="https://wa.me/message/2C3ZVKY2CN4BE1" class="twi" href=""><i class="fa-brands fa-whatsapp fa"></i></a>
 
                             </div>
                         </div>

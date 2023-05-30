@@ -21,9 +21,6 @@ $fila = mysqli_fetch_assoc($resultado);
     <div class="caja-todo">
         <header>
             <span></span>
-            <form acttion="" method="post">
-                <button class="actualizar" type="submit" name="cerrar" id="cerrar">CERRAR SESION</button>
-            </form>
         </header>
         <div class="contenido">
             <a class="volver" href="../PAGINA/paginausuario.php?=<?php echo $id_usuario ?>">VOLVER</a>
